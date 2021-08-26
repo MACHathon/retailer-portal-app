@@ -15,8 +15,8 @@ const Search: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Hello world!</title>
-        <meta name="description" content="Starter" />
+        <title>Child Portal - Search</title>
+        <meta name="description" content="Search" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

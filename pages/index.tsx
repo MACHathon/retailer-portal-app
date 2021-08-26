@@ -35,8 +35,8 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Hello world!</title>
-        <meta name="description" content="Starter" />
+        <title>Child Portal - Login</title>
+        <meta name="description" content="Login" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
