@@ -1,5 +1,9 @@
+import { Box } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { LoggedInUserClient } from "../../lib/Commercetools/Clients/APIClient";
+
+import TextInputField from "@/components/shared-components/input-fields/text-input-field";
+import ConfirmButton from "@/components/shared-components/buttons/confirm-button";
 
 interface LoginProps {}
 
@@ -27,7 +31,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       });
   }, []);
 
-  const handleLoginClick = () => {
+  const handleLoginClick = () => { 
     (async () => {
       const rawResponse = await fetch("http://localhost:3000/api/login", {
         method: "POST",
@@ -69,18 +73,17 @@ const Login: React.FC<LoginProps> = ({}) => {
       ) : isLoggedIn ? (
         <h1>Logged in</h1>
       ) : (
-        <div>
+        <Box
+          d='flex'
+          flexDirection='column'
+        >
           <p>dave@daveleigh.xyz</p>
           <p>password</p>
-          <input onChange={handleUsernameChange} placeholder="Username" />
-          <input
-            onChange={handlePasswordChange}
-            type="password"
-            placeholder="Password"
-          />
-          <button onClick={handleLoginClick}>Login</button>
+          <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Username" />
+          <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Password" />
+          <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
           {isError ? <div>Invalid credentials</div> : null}
-        </div>
+        </Box>
       )}
     </>
   );

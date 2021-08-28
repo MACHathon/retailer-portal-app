@@ -9,18 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.6.6",
     "@commercetools/platform-sdk": "^1.17.1",
     "@commercetools/sdk-auth": "^3.0.12",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^6.1.4",
     "@commercetools/sdk-middleware-http": "^6.0.11",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "algoliasearch": "^4.10.3",
     "cookie": "^0.4.1",
     "next": "11.1.0",
     "node-fetch": "^2.6.1",
     "react": "17.0.2",
     "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
-    "algoliasearch": "^4.10.3",
+    "react-icons": "^4.2.0",
     "react-instantsearch-dom": "^6.12.1"
   },
   "devDependencies": {

@@ -3,4 +3,6 @@ export type Card = {
     image: string,
     title: string,
     context: string,
+    colour: string,
+    secondColour: string
 }

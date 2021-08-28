@@ -4,25 +4,33 @@
             "id": "1",
             "image": "teddy-bear",
             "title":"Donate Items",
-            "context": "Donate Toys, Games and more for Toykens!"
+            "context": "Donate Toys, Games and more for Toykens!",
+            "colour": "#ACD9F0",
+            "secondColour": "#66B8EC"
         },
         {
             "id": "2",
             "image": "toyken",
             "title": "Spend my Toykens",
-            "context": "Exchange your Toykens for rewards!"
+            "context": "Exchange your Toykens for rewards!",
+            "colour": "#F6D396",
+            "secondColour": "#F6C165"
         },
         {
             "id": "3",
             "image": "gifts",
             "title": "Choose Rewards",
-            "context": "Exchange your Toykens for rewards!"
+            "context": "Exchange your Toykens for rewards!",
+            "colour": "#EAD0DA",
+            "secondColour": "#EA6699"
         },
         {
             "id": "4",
             "image": "signpost",
             "title": "Toyken Trails",
-            "context": "Exchange your Toykens for rewards!"
+            "context": "Exchange your Toykens for rewards!",
+            "colour": "#FDD7AF",
+            "secondColour": "#FD8300"
         }
     ]
 }
