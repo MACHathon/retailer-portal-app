@@ -30,12 +30,11 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
             justifyContent='space-between'
             alignItems='center'
             bg={ card.colour } 
-            borderRadius='lg'
+            borderRadius={ currentPath ? 'lg' : 'none'}
             width='326px' 
             height='652px' 
             fontFamily='Roboto Condensed'
             lineHeight='1.2'  
-            marginBottom='15px'
             padding={6} 
         >
             <p>{ card.image }</p>

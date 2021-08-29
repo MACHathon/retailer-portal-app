@@ -17,6 +17,7 @@ const MainLayout: NextPage<Props> = ({ children }):JSX.Element => {
             height='100%'
             minHeight='100vh'
             bg='#FFF9E4'
+            padding='0 10%'
         >
             <MainHeader />
             { children }

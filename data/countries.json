@@ -1,0 +1,12 @@
+{
+    "countries": [
+        {
+            "country": "United Kingdom",
+            "icon": "EN"
+        },
+        {
+            "country": "Germany",
+            "icon": "DE"
+        }
+    ]
+}

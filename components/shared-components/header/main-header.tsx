@@ -1,12 +1,13 @@
 import { Box, Text } from "@chakra-ui/react"
 import { NextPage } from "next"
 
+import DropDownSelector from "@/components/shared-components/input-fields/drop-down-selector";
 
 const MainHeader: NextPage = ():JSX.Element => {
 
     return (
         <Box
-            width='80%'
+            width='100%'
             margin='auto'
             d='flex'
             justifyContent='space-between'
@@ -26,9 +27,7 @@ const MainHeader: NextPage = ():JSX.Element => {
                     Toyken
                 </Text>
             </Box>
-            <div>
-                Select a country
-            </div>
+            <DropDownSelector />
         </Box>
     )
 

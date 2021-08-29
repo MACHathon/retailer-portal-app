@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
 import { getData } from "utils/getData";
+import dynamic from 'next/dynamic'
+import { Card } from "types/card-type";
+import { Box } from "@chakra-ui/react";
 
 import DashboardCard from "@/components/dashboard/dashboard-card/dashboard-card";
-import { Card } from "types/card-type";
+import DashboardLayout from "@/components/shared-components/layouts/dashboard-layout";
 
 interface Props {
     card: Card;
@@ -10,10 +13,42 @@ interface Props {
 
 const DashboardSection: NextPage<Props> = ({ card }) => {
 
+    const onSectionSwitch = (section: string): JSX.Element => {
+        switch(section){
+            case '1': {
+                const DonateItems = dynamic(() => import("@/components/dashboard/dashboard-sections/donate-items") as any )
+                return <DonateItems />
+            };
+            case '2': {
+                const SpendToykens = dynamic(() => import("@/components/dashboard/dashboard-sections/spend-toykens") as any )
+                return <SpendToykens />
+            };
+            case '3': {
+                const ChooseRewards = dynamic(() => import("@/components/dashboard/dashboard-sections/choose-rewards") as any )
+                return <ChooseRewards />
+            };
+            case '4': {
+                const ToykenTrails = dynamic(() => import("@/components/dashboard/dashboard-sections/toyken-trails") as any )
+                return <ToykenTrails />
+            };
+            default: throw new Error('Unknown section type'); 
+        }
+    }
+
     return (
-        <div>
-            <DashboardCard key={card.id} card={card} />
-        </div>
+        <DashboardLayout>           
+            <Box
+                d='flex' 
+                mt='2' 
+                width='100%'
+                margin='auto'
+                overflow='hidden'
+                borderRadius='10px'
+            >
+                <DashboardCard key={card.id} card={card} />
+                { onSectionSwitch(card.id) }
+            </Box>
+        </DashboardLayout>
     )
 
 }

@@ -10,7 +10,7 @@ const DashboardHeader: NextPage = ():JSX.Element => {
     return (
         <Box
             d='flex'
-            width='80%'
+            width='100%'
             margin='3.5% auto'
             justifyContent='space-between'
             alignItems='center'

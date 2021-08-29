@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from "next/router";
-import { Fragment } from 'react';
 import { getData } from 'utils/getData';
 import { Card } from 'types/card-type';
 import { Box } from '@chakra-ui/react';
 
 import DashboardCard from '@/components/dashboard/dashboard-card/dashboard-card';
 import DashboardHeader from '@/components/dashboard/dashboard-header/dashboard-header';
+import DashboardLayout from '@/components/shared-components/layouts/dashboard-layout';
 
 interface Props {
     cards: Card[];
@@ -18,20 +18,19 @@ const Dashboard: NextPage<Props> = ({ cards }) => {
     const router = useRouter();
   
     return(       
-        <Fragment>
+        <DashboardLayout>
             <Head>
                 <title>Child Portal - Dashboard</title>
                 <meta name="description" content="Dashboard" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <DashboardHeader />
             <Box 
                 d='flex' 
                 justifyContent='space-between' 
                 mt='2' 
                 alignItems='center'
-                width='80%'
+                width='100%'
                 margin='auto'
                 flexWrap='wrap'
                 paddingBottom='3%'
@@ -40,7 +39,7 @@ const Dashboard: NextPage<Props> = ({ cards }) => {
                     cards.map(card => <DashboardCard key={card.id} card={card}/>)
                 }
             </Box>            
-        </Fragment>      
+        </DashboardLayout>      
       )
 }
 
