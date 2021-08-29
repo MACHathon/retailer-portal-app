@@ -1,6 +1,7 @@
 import { IconButton } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { ReactElement } from "react";
+import { motion } from 'framer-motion';
 
 interface Props {
     bgColour: string,
@@ -12,8 +13,10 @@ interface Props {
 
 const CustomIconButton: NextPage<Props> = ({ bgColour, width, height, destinationHandler, icon }): JSX.Element => {
 
+    const MotionIconButton = motion(IconButton)
+
     return (
-        <IconButton
+        <MotionIconButton
             aria-label="Go to"
             fontSize='30px'
             color='white'
@@ -24,6 +27,11 @@ const CustomIconButton: NextPage<Props> = ({ bgColour, width, height, destinatio
             height={ height }
             icon={ icon }
             onClick={destinationHandler}
+            whileHover={{
+                scale: .9,
+                transition: { duration: .2 },
+              }}
+              whileTap={{ scale: 1.04 }}
         />
     )
 }

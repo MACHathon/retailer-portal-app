@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Text } from "@chakra-ui/react";
 import CustomIconButton from '@/components/shared-components/buttons/custom-icon-button';
 import { HiArrowNarrowRight, HiX } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
 import { Card } from 'types/card-type';
 
@@ -13,7 +14,8 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
 
     const router = useRouter();
     const { asPath } = useRouter()
-    const currentPath = asPath === '/dashboard' ? true : false
+    const currentPath = asPath === '/dashboard' ? true : false;
+    const MotionBox = motion(Box)
     
     const onRedirectHandler = (): void => {
         if(currentPath){
@@ -24,7 +26,7 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
     }
 
     return (
-        <Box 
+        <MotionBox 
             d='flex'
             flexDirection='column'
             justifyContent='space-between'
@@ -36,6 +38,10 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
             fontFamily='Roboto Condensed'
             lineHeight='1.2'  
             padding={6} 
+            whileHover={currentPath && {
+                scale: 1.05,
+                transition: { duration: .3 }
+              }}
         >
             <p>{ card.image }</p>
             <Text 
@@ -60,7 +66,7 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
                 icon={currentPath ? <HiArrowNarrowRight/> : <HiX />}
                 destinationHandler={onRedirectHandler}
             />
-        </Box>
+        </MotionBox>
     )
 }
 
