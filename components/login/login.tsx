@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       .then((response: any) => {
         if (!!response?.body?.id) {
           console.log(response);
-          router.push('/dashboard'); 
+          router.push('/dashboard');
         }
       })
       .catch((error) => {
@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = ({}) => {
         const content = await rawResponse.json();
 
         if (!!content?.access_token) {
-          setIsLoggedIn(true);
+          router.push('/dashboard');
           setIsWaiting(false);
         }
       }
