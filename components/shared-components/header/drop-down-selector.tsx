@@ -46,7 +46,7 @@ const DropDownSelector: NextPage = (): JSX.Element => {
                 onClick={toggleSelect}
             >
                 <Text
-                    fontSize='18px'
+                    fontSize={{ base: "0px", md: "18px", lg: "18px" }}
                     marginRight='25px'
                 >
                     Select a country
