@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       .then((response: any) => {
         if (!!response?.body?.id) {
           console.log(response);
-          router.push('/dashboard');
+          router.push('/dashboard'); 
         }
       })
       .catch((error) => {
