@@ -35,7 +35,7 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
             borderRadius={ currentPath ? 'lg' : 'none'}
             width='326px'
             height='652px' 
-            fontFamily='Roboto Condensed'
+            fontFamily='Raleway'
             lineHeight='1.2'  
             padding={6} 
             whileHover={currentPath && {
@@ -66,7 +66,7 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
                     { card.title }
                 </Text>
                 <Text
-                    fontSize='24px' 
+                    fontSize='20px' 
                     fontWeight='400'
                     align='center'
                 >

@@ -14,7 +14,7 @@ const ToykenInfo: NextPage = ():JSX.Element => {
         padding='6px'
       >
           <Text
-             fontFamily='Roboto Condensed'
+             fontFamily='Raleway'
              fontSize='24px'
              fontWeight='700'
              padding='5px 14px'

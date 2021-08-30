@@ -12,7 +12,7 @@ const ColourSection: NextPage<Props> = ({ bgColour, children }): JSX.Element => 
         <Box
             width='100%'
             height='652px' 
-            fontFamily='Roboto Condensed'
+            fontFamily='Raleway'
             padding={6} 
             bg={ bgColour }
         >

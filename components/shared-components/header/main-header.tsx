@@ -36,7 +36,7 @@ const MainHeader: NextPage = ():JSX.Element => {
                         alignItems='center'
                         fontSize='26'
                         fontWeight='700'
-                        fontFamily='Roboto Condensed'
+                        fontFamily='Raleway'
                         color='#EA6699'
                         cursor='pointer'
                       >

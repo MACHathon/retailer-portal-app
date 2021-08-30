@@ -45,7 +45,7 @@ const ClientInfo: NextPage = ():JSX.Element => {
             </Image>
             <MotionText
                 marginLeft='1%'
-                fontFamily='Roboto Condensed'
+                fontFamily='Raleway'
                 fontSize='44px'
                 fontWeight='700'
                 variants={ sentence }

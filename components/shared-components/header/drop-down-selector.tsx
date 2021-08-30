@@ -35,7 +35,7 @@ const DropDownSelector: NextPage = (): JSX.Element => {
     return(
         <Box 
             position='relative'
-            fontFamily='Roboto Condensed'
+            fontFamily='Raleway'
             tabIndex={0} 
             onBlur={() => setIsListOpen(false)}
         >
@@ -49,7 +49,7 @@ const DropDownSelector: NextPage = (): JSX.Element => {
                     fontSize='18px'
                     marginRight='25px'
                 >
-                    Selecte a country
+                    Select a country
                 </Text>
                 <Image src={selectedCountry} alt='country' height='34px' width='34px'/>
                 <Text
