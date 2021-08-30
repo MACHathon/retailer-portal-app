@@ -18,7 +18,8 @@ const ConfirmButton: NextPage<Props> = ({ children, onClick }): JSX.Element => {
             margin='12px auto'
             bg='#66B8EC'
             color='white'
-            boxShadow='xl'
+            boxShadow='m'
+            _hover={{ bg: "#2f5a74" }}
             onClick={ onClick }
         >
             { children }

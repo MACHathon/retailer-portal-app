@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main className="w-1/4">
         <Login />
       </main>
     </div>

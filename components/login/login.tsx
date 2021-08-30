@@ -1,7 +1,6 @@
-import { Box } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { LoggedInUserClient } from "../../lib/Commercetools/Clients/APIClient";
-
+import { Box, Image, Text } from "@chakra-ui/react";
 import TextInputField from "@/components/shared-components/input-fields/text-input-field";
 import ConfirmButton from "@/components/shared-components/buttons/confirm-button";
 
@@ -76,9 +75,17 @@ const Login: React.FC<LoginProps> = ({}) => {
         <Box
           d='flex'
           flexDirection='column'
+          width='80%'
         >
-          <p>dave@daveleigh.xyz</p>
-          <p>password</p>
+          <Text 
+                    width='100%'
+                    fontSize='24px' 
+                    fontWeight='bold'                            
+                    align='center'
+                    paddingBottom='2'
+                >
+              Child login
+          </Text>
           <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Username" />
           <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Password" />
           <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
