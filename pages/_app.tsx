@@ -6,7 +6,7 @@ import '../styles/globals.css'
 import MainLayout from '@/components/shared-components/layouts/main-layout'
 import NotificationProvider from 'context/notification-context/notification'
 
-import { Fonts } from "../lib/Fonts";
+import { Fonts } from "../packages/Fonts";
 
 const theme = extendTheme({
   fonts: {

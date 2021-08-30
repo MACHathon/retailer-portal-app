@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { LoggedInUserClient } from "../../lib/Commercetools/Clients/APIClient";
+import { LoggedInUserClient } from "../../packages/Commercetools/Clients/APIClient";
 import { Box, Image, Text } from "@chakra-ui/react";
 import TextInputField from "@/components/shared-components/input-fields/text-input-field";
 import ConfirmButton from "@/components/shared-components/buttons/confirm-button";
+import { useRouter } from 'next/router';
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = ({}) => {
+
+  const router = useRouter();
+  const { asPath } = useRouter()
+
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [isWaiting, setIsWaiting] = React.useState<boolean>(true);
@@ -20,8 +25,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       .then((response: any) => {
         if (!!response?.body?.id) {
           console.log(response);
-          setIsLoggedIn(true);
-          setIsWaiting(false);
+          router.push('/dashboard');
         }
       })
       .catch((error) => {
@@ -30,9 +34,9 @@ const Login: React.FC<LoginProps> = ({}) => {
       });
   }, []);
 
-  const handleLoginClick = () => { 
+  const handleLoginClick = () => {
     (async () => {
-      const rawResponse = await fetch("http://localhost:3000/api/login", {
+      const rawResponse = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/login`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -86,8 +90,8 @@ const Login: React.FC<LoginProps> = ({}) => {
           >
             Child login
           </Text>
-          <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Username" />
-          <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Password" />
+          <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Your ID" />
+          <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Your PIN number" />
           <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
           {isError ? <div>Invalid credentials</div> : null}
         </Box>
