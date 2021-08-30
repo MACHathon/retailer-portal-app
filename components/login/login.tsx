@@ -75,16 +75,16 @@ const Login: React.FC<LoginProps> = ({}) => {
         <Box
           d='flex'
           flexDirection='column'
-          width='80%'
+          width='100%'
         >
           <Text 
-                    width='100%'
-                    fontSize='24px' 
-                    fontWeight='bold'                            
-                    align='center'
-                    paddingBottom='2'
-                >
-              Child login
+            width='100%'
+            fontSize='24px' 
+            fontWeight='bold'                            
+            align='center'
+            paddingBottom='2'
+          >
+            Child login
           </Text>
           <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Username" />
           <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Password" />
