@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import {
   AnonUserClient,
   LoggedInUserClient,
-} from "../lib/Commercetools/Clients/APIClient";
+} from "../packages/Commercetools/Clients/APIClient";
 import Login from "../components/login/login";
 
 const Home: NextPage = () => {
