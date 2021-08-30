@@ -16,19 +16,19 @@ const DashboardSection: NextPage<Props> = ({ card }) => {
     const onSectionSwitch = (section: string): JSX.Element => {
         switch(section){
             case '1': {
-                const DonateItems = dynamic(() => import("@/components/dashboard/dashboard-sections/donate-items") as any )
+                const DonateItems = dynamic(() => import("@/components/dashboard/dashboard-sections/donate-items") as any , { ssr: false })
                 return <DonateItems />
             };
             case '2': {
-                const SpendToykens = dynamic(() => import("@/components/dashboard/dashboard-sections/spend-toykens") as any )
+                const SpendToykens = dynamic(() => import("@/components/dashboard/dashboard-sections/spend-toykens") as any, { ssr: false } )
                 return <SpendToykens />
             };
             case '3': {
-                const ChooseRewards = dynamic(() => import("@/components/dashboard/dashboard-sections/choose-rewards") as any )
+                const ChooseRewards = dynamic(() => import("@/components/dashboard/dashboard-sections/choose-rewards") as any, { ssr: false } )
                 return <ChooseRewards />
             };
             case '4': {
-                const ToykenTrails = dynamic(() => import("@/components/dashboard/dashboard-sections/toyken-trails") as any )
+                const ToykenTrails = dynamic(() => import("@/components/dashboard/dashboard-sections/toyken-trails") as any, { ssr: false } )
                 return <ToykenTrails />
             };
             default: throw new Error('Unknown section type'); 
@@ -45,7 +45,9 @@ const DashboardSection: NextPage<Props> = ({ card }) => {
                 overflow='hidden'
                 borderRadius='10px'
             >
-                <DashboardCard key={card.id} card={card} />
+                <Box flex='1'>
+                    <DashboardCard key={card.id} card={card} />
+                </Box>
                 { onSectionSwitch(card.id) }
             </Box>
         </DashboardLayout>

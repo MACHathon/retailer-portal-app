@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Text, Image } from "@chakra-ui/react"
 import { NextPage } from "next"
 
 const ToykenInfo: NextPage = ():JSX.Element => {
@@ -23,12 +23,15 @@ const ToykenInfo: NextPage = ():JSX.Element => {
                 102
           </Text>
           <Box
+            d='flex'
+            justifyContent='center'
+            alignItems='center'
             bg='#ACD9F0'
             width='75px'
             height='45px'
             borderRadius='70px'
           >
-
+            <Image src="../../icons/toyken-single.png" alt="coin" height='38px' width='38px' />
           </Box>
       </Box>
     )

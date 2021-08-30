@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Text } from "@chakra-ui/react";
-import CustomIconButton from '@/components/shared-components/buttons/custom-icon-button';
+import { Box, Image, Text } from "@chakra-ui/react";
 import { HiArrowNarrowRight, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 
+import CustomIconButton from '@/components/shared-components/buttons/custom-icon-button';
 import { Card } from 'types/card-type';
 
 interface Props {
@@ -29,11 +29,11 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
         <MotionBox 
             d='flex'
             flexDirection='column'
-            justifyContent='space-between'
+            justifyContent='center'
             alignItems='center'
             bg={ card.colour } 
             borderRadius={ currentPath ? 'lg' : 'none'}
-            width='326px' 
+            width='326px'
             height='652px' 
             fontFamily='Roboto Condensed'
             lineHeight='1.2'  
@@ -43,29 +43,43 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
                 transition: { duration: .3 }
               }}
         >
-            <p>{ card.image }</p>
-            <Text 
-                width='80%'
-                fontSize='44px' 
-                fontWeight='bold'                            
-                align='center'
-            >
-                { card.title }
-            </Text>
-            <Text
-                fontSize='24px' 
-                fontWeight='400'
-                align='center'
-            >
-                { card.context }
-            </Text>
-            <CustomIconButton 
-                width='72px'
-                height='72px'
-                bgColour={card.secondColour}
-                icon={currentPath ? <HiArrowNarrowRight/> : <HiX />}
-                destinationHandler={onRedirectHandler}
+            <Image 
+                src={card.image} 
+                alt='image' 
+                height='170px' 
+                width='170px' 
             />
+            <Box
+              d='flex'
+              flexDirection='column'
+              justifyContent='space-between'
+              alignItems='center'
+              height='50%'
+              marginTop='60px'
+            >
+                <Text 
+                    width='80%'
+                    fontSize='44px' 
+                    fontWeight='bold'                            
+                    align='center'
+                >
+                    { card.title }
+                </Text>
+                <Text
+                    fontSize='24px' 
+                    fontWeight='400'
+                    align='center'
+                >
+                    { card.context }
+                </Text>
+                <CustomIconButton 
+                    width='72px'
+                    height='72px'
+                    bgColour={card.secondColour}
+                    icon={currentPath ? <HiArrowNarrowRight/> : <HiX />}
+                    destinationHandler={onRedirectHandler}
+                />
+                </Box>
         </MotionBox>
     )
 }

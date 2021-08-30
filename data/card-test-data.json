@@ -2,7 +2,7 @@
     "cards": [
         {
             "id": "1",
-            "image": "teddy-bear",
+            "image": "../../icons/teddy-bear.svg",
             "title":"Donate Items",
             "context": "Donate Toys, Games and more for Toykens!",
             "colour": "#ACD9F0",
@@ -10,7 +10,7 @@
         },
         {
             "id": "2",
-            "image": "toyken",
+            "image": "../../icons/toyken-stack.png",
             "title": "Spend my Toykens",
             "context": "Exchange your Toykens for rewards!",
             "colour": "#F6D396",
@@ -18,7 +18,7 @@
         },
         {
             "id": "3",
-            "image": "gifts",
+            "image": "../../icons/gift.svg",
             "title": "Choose Rewards",
             "context": "Exchange your Toykens for rewards!",
             "colour": "#EAD0DA",
@@ -26,7 +26,7 @@
         },
         {
             "id": "4",
-            "image": "signpost",
+            "image": "../../icons/signpost.svg",
             "title": "Toyken Trails",
             "context": "Exchange your Toykens for rewards!",
             "colour": "#FDD7AF",

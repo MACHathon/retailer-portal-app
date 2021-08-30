@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Image } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { motion } from 'framer-motion';
 
@@ -35,13 +35,14 @@ const ClientInfo: NextPage = ():JSX.Element => {
             width='100%'
             alignItems='center'
         >
-            <Box
+            <Image
+                src='../../images/clara-profile.png'
+                objectFit='contain'
                 width='85px'
                 height='85px'
                 borderRadius='50%'
-                bg='#F6D396' 
             >
-            </Box>
+            </Image>
             <MotionText
                 marginLeft='1%'
                 fontFamily='Roboto Condensed'
