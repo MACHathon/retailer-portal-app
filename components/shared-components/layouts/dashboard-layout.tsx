@@ -1,7 +1,7 @@
 import { Fragment, ReactNode} from 'react';
 import { NextPage } from 'next';
 
-import DashboardHeader from '@/components/dashboard/dashboard-header/dashboard-header';
+import DashboardHeader from '@/components/dashboard/kid-dashboard/dashboard-header/dashboard-header';
 
 interface Props {
     children: ReactNode

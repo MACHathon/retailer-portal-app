@@ -14,14 +14,14 @@ const DashboardCard: NextPage<Props> = ({ card }): JSX.Element  => {
 
     const router = useRouter();
     const { asPath } = useRouter()
-    const currentPath = asPath === '/dashboard' ? true : false;
+    const currentPath = asPath === '/kid-dashboard' ? true : false;
     const MotionBox = motion(Box)
     
     const onRedirectHandler = (): void => {
         if(currentPath){
-            router.push(`dashboard/section/${card.id}`)
+            router.push(`kid-dashboard/section/${card.id}`)
         }else {
-            router.push('/dashboard')
+            router.push('/kid-dashboard')
         }
     }
 

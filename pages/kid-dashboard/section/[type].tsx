@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { Card } from "types/card-type";
 import { Box } from "@chakra-ui/react";
 
-import DashboardCard from "@/components/dashboard/dashboard-card/dashboard-card";
+import DashboardCard from "@/components/dashboard/kid-dashboard/dashboard-card/dashboard-card";
 import DashboardLayout from "@/components/shared-components/layouts/dashboard-layout";
 
 interface Props {
@@ -16,19 +16,19 @@ const DashboardSection: NextPage<Props> = ({ card }) => {
     const onSectionSwitch = (section: string): JSX.Element => {
         switch(section){
             case '1': {
-                const DonateItems = dynamic(() => import("@/components/dashboard/dashboard-sections/donate-items") as any , { ssr: false })
+                const DonateItems = dynamic(() => import("@/components/dashboard/kid-dashboard/dashboard-sections/donate-items/donate-items") as any , { ssr: false })
                 return <DonateItems />
             };
             case '2': {
-                const SpendToykens = dynamic(() => import("@/components/dashboard/dashboard-sections/spend-toykens") as any, { ssr: false } )
+                const SpendToykens = dynamic(() => import("@/components/dashboard/kid-dashboard/dashboard-sections/spend-toykens/spend-toykens") as any, { ssr: false } )
                 return <SpendToykens />
             };
             case '3': {
-                const ChooseRewards = dynamic(() => import("@/components/dashboard/dashboard-sections/choose-rewards") as any, { ssr: false } )
+                const ChooseRewards = dynamic(() => import("@/components/dashboard/kid-dashboard/dashboard-sections/choose-rewards/choose-rewards") as any, { ssr: false } )
                 return <ChooseRewards />
             };
             case '4': {
-                const ToykenTrails = dynamic(() => import("@/components/dashboard/dashboard-sections/toyken-trails") as any, { ssr: false } )
+                const ToykenTrails = dynamic(() => import("@/components/dashboard/kid-dashboard/dashboard-sections/toyken-trails/toyken-trails") as any, { ssr: false } )
                 return <ToykenTrails />
             };
             default: throw new Error('Unknown section type'); 

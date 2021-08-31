@@ -5,15 +5,14 @@ import { getData } from 'utils/getData';
 import { Card } from 'types/card-type';
 import { Box } from '@chakra-ui/react';
 
-import DashboardCard from '@/components/dashboard/dashboard-card/dashboard-card';
-import DashboardHeader from '@/components/dashboard/dashboard-header/dashboard-header';
+import DashboardCard from '@/components/dashboard/kid-dashboard/dashboard-card/dashboard-card';
 import DashboardLayout from '@/components/shared-components/layouts/dashboard-layout';
 
 interface Props {
     cards: Card[];
 }
 
-const Dashboard: NextPage<Props> = ({ cards }) => {
+const KidDashboard: NextPage<Props> = ({ cards }) => {
 
     const router = useRouter();
   
@@ -43,7 +42,7 @@ const Dashboard: NextPage<Props> = ({ cards }) => {
       )
 }
 
-export default Dashboard;
+export default KidDashboard;
 
 export const getStaticProps = async () => {
 

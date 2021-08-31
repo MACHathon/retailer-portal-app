@@ -1,5 +1,6 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
+import { useRouter } from 'next/router';
 import { FiLogOut } from 'react-icons/fi'
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -16,6 +17,10 @@ const MainHeader: NextPage = ():JSX.Element => {
 
     const isLoggedIn: boolean = false;
 
+    const router = useRouter();
+    const { asPath } = useRouter()
+    const currentPath = asPath === '/' ? false : true;
+
     return (
         <Box
             width='100%'
@@ -30,7 +35,14 @@ const MainHeader: NextPage = ():JSX.Element => {
             >
                 {
                     !isLoggedIn 
-                    ? <Image src="../../icons/toyken-logo.svg" alt="logo" width='175px' height='45px'/>
+                    ? <Image 
+                        src="../../icons/toyken-logo.svg" 
+                        alt="logo" 
+                        width='175px' 
+                        height='45px'
+                        cursor={ currentPath ? 'pointer' : 'default' }
+                        onClick={ currentPath ? () => router.push('/') : undefined}
+                      />
                     : <Box  
                         d='flex'
                         alignItems='center'
