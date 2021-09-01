@@ -10,6 +10,7 @@ interface Props {
 const ColourSection: NextPage<Props> = ({ bgColour, children }): JSX.Element => {
     return (
         <Box
+            position='relative'
             width='100%'
             height='652px' 
             fontFamily='Raleway'

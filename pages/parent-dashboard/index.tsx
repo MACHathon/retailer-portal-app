@@ -8,6 +8,24 @@ import { RiUserHeartFill } from 'react-icons/ri'
 
 import ParentLayout from '@/components/shared-components/layouts/parent-layout';
 import SectionButton from '@/components/dashboard/parent-dashboard/section-button/section-button';
+import { ParentSection } from 'types/parent-section';
+
+
+//Dummy date - ToBe removed
+const parentSection: ParentSection[] = [
+    {
+        icon: <AiTwotoneStar />,
+        bgColour: '#66B8EC',
+        text: 'Create Rewards for my children',
+        onClick: () => {}
+    },
+    {
+        icon: <RiUserHeartFill />,
+        bgColour: '#EA6699',
+        text: ' Manage Accounts',
+        onClick: () => {}
+    }
+]
 
 interface Props {
     cards: Card[];
@@ -29,21 +47,20 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
                 width='50%'
                 margin='15% auto'
             >
-                <SectionButton 
-                    icon={<AiTwotoneStar />} 
-                    bgColour={'#66B8EC'}
-                    onClick={() => {}} 
-                >
-                    Create Rewards for my children
-                </SectionButton>
-
-                <SectionButton 
-                    icon={<RiUserHeartFill />} 
-                    bgColour={'#EA6699'}
-                    onClick={() => {}} 
-                >
-                    Manage Accounts
-                </SectionButton>
+                {
+                    parentSection.map( (section: ParentSection, index: number) => {
+                        return (
+                            <SectionButton 
+                                key={index}
+                                icon={section.icon} 
+                                bgColour={section.bgColour}
+                                onClick={section.onClick} 
+                            >
+                                { section.text }
+                            </SectionButton>
+                        )
+                    })
+                }       
             </Box>
         </ParentLayout>
       )

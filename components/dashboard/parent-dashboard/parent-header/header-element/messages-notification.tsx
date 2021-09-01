@@ -1,8 +1,12 @@
 import { Box, Image, Text } from "@chakra-ui/react"
 import { NextPage } from "next";
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
 const MessagesNotification: NextPage = (): JSX.Element => {
+
+    const { asPath } = useRouter()
+    const currentPath = asPath === '/parent-dashboard' ? true : false;
 
     const MotionImage = motion(Image);
 
@@ -15,15 +19,18 @@ const MessagesNotification: NextPage = (): JSX.Element => {
             alignItems='center'
             cursor='pointer'
         >
-            <Text
-                fontFamily='Raleway'
-                fontSize='20px'
-                fontWeight='700'
-                marginRight='15px'
-                color='#66B8EC'
-            >
-                1 new message
-            </Text>
+            {
+                currentPath &&
+                <Text
+                    fontFamily='Raleway'
+                    fontSize='20px'
+                    fontWeight='700'
+                    marginRight='15px'
+                    color='#66B8EC'
+                >
+                    1 new message
+                </Text>
+            }
             <MotionImage 
                 whileHover={
                     {rotate: [0, 45, 0 -45, -90, -45, 0], 
