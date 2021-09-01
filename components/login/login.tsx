@@ -4,6 +4,7 @@ import { Box, Image, Text } from "@chakra-ui/react";
 import TextInputField from "@/components/shared-components/input-fields/text-input-field";
 import ConfirmButton from "@/components/shared-components/buttons/confirm-button";
 import { useRouter } from 'next/router';
+import ImageFooter from "../shared-components/image-footer/image-footer";
 
 interface LoginProps {}
 
@@ -94,6 +95,7 @@ const Login: React.FC<LoginProps> = ({}) => {
           <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Your PIN number" />
           <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
           {isError ? <div>Invalid credentials</div> : null}
+          <ImageFooter />
         </Box>
       )}
     </>
