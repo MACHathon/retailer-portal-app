@@ -1,23 +1,17 @@
-import { Box } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
-import ClientInfo from './header-elements/client-info';
+import HeaderLeyout from '@/components/shared-components/layouts/header-layout';
+import ClientInfo from '../../../shared-components/client-info/client-info';
 import ToykenInfo from './header-elements/toyken-info';
 
 
 const DashboardHeader: NextPage = ():JSX.Element => {
 
     return (
-        <Box
-            d='flex'
-            width='100%'
-            margin='3.5% auto'
-            justifyContent='space-between'
-            alignItems='center'
-        >
-            <ClientInfo />
+        <HeaderLeyout>
+            <ClientInfo image='../../images/clara-profile.png' message='Hello Clara! (#0066)'/>
             <ToykenInfo />
-        </Box>
+        </HeaderLeyout>
     )
 }
 

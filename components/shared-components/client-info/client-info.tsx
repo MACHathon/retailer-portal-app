@@ -2,10 +2,14 @@ import { Box, Text, Image } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { motion } from 'framer-motion';
 
-const ClientInfo: NextPage = ():JSX.Element => {
+interface Props {
+    image?: string
+    message: string
+}
+
+const ClientInfo: NextPage<Props> = ({ image, message }):JSX.Element => {
 
     const MotionText = motion(Text);
-    const text = 'Hello Clara! (#0066)'
 
     const sentence = {
         hidden: { opacity: 1 },
@@ -35,14 +39,17 @@ const ClientInfo: NextPage = ():JSX.Element => {
             width='100%'
             alignItems='center'
         >
-            <Image
-                src='../../images/clara-profile.png'
-                objectFit='contain'
-                width='85px'
-                height='85px'
-                borderRadius='50%'
-            >
-            </Image>
+            {
+                image &&
+                <Image
+                    src={image}
+                    objectFit='contain'
+                    width='85px'
+                    height='85px'
+                    borderRadius='50%'
+                >
+                </Image>
+            }
             <MotionText
                 marginLeft='1%'
                 fontFamily='Raleway'
@@ -53,7 +60,7 @@ const ClientInfo: NextPage = ():JSX.Element => {
                 animate='visible'
             >
                {
-                    text.split('').map(( char, index ) => {
+                    message.split('').map(( char, index ) => {
                         return (
                             <motion.span 
                                 variants={ letter }
