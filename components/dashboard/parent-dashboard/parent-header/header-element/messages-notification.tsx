@@ -1,7 +1,11 @@
 import { Box, Image, Text } from "@chakra-ui/react"
-import { NextPage } from "next"
+import { NextPage } from "next";
+import { motion } from 'framer-motion';
 
 const MessagesNotification: NextPage = (): JSX.Element => {
+
+    const MotionImage = motion(Image);
+
     return (
         <Box
             d='flex'
@@ -9,6 +13,7 @@ const MessagesNotification: NextPage = (): JSX.Element => {
             width='240px'
             height='40px'
             alignItems='center'
+            cursor='pointer'
         >
             <Text
                 fontFamily='Raleway'
@@ -19,7 +24,15 @@ const MessagesNotification: NextPage = (): JSX.Element => {
             >
                 1 new message
             </Text>
-            <Image src='../../icons/notification-bell.svg' alt='msg' height='38px' width='38px' />
+            <MotionImage 
+                whileHover={
+                    {rotate: [0, 45, 0 -45, -90, -45, 0], 
+                    transition: { duration: 1, repeat: 2 }}}
+                src='../../icons/notification-bell.svg' 
+                alt='msg' 
+                height='38px' 
+                width='38px' 
+            />
         </Box>
     )
 }
