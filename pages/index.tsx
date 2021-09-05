@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { getInitialLocale } from "lib/translations/getInitialLocale";
+
 import {
   AnonUserClient,
   LoggedInUserClient,
@@ -10,7 +12,6 @@ import {
 import Login from "../components/login/login";
 
 const Home: NextPage = () => {
-  
   // Sign up to do
   // useEffect(() => {
   //   AnonUserClient.me()
@@ -31,6 +32,9 @@ const Home: NextPage = () => {
   //     console.log(x);
   //   });
 
+  useEffect(() => {
+    window.location.replace(`/${getInitialLocale()}`);
+  });
 
   return (
     <div className={styles.container}>
@@ -40,9 +44,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-full md:w-96 lg:w-96">
+      {/* <main className="w-full md:w-96 lg:w-96">
         <Login />
-      </main>
+      </main> */}
     </div>
   );
 };
