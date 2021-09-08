@@ -17,23 +17,25 @@ export const Dashboard = ({ fields }: TypeComponentRetailerDashboard) => {
   );
 
   return (
-    <div>
+    <>
       <div>
-        <div>{tokenisedWelcomeLabel}</div>
-        <div>{tokeniseNotificationLabel}</div>
+        <div>
+          <div>{tokenisedWelcomeLabel}</div>
+          <div>{tokeniseNotificationLabel}</div>
+        </div>
+        <div>
+          <div>{tokenisedOffersToReviewLabel}</div>
+          <div>{fields.reviewCtaLabel}</div>
+        </div>
+        <div>
+          <div>{fields.acceptToykensLabel}</div>
+          <div>{fields.acceptToykensCtaLabel}</div>
+        </div>
+        <div>
+          <div>{fields.myInventoryCtaLabel}</div>
+          <div>{fields.manageAccountCtaLabel}</div>
+        </div>
       </div>
-      <div>
-        <div>{tokenisedOffersToReviewLabel}</div>
-        <div>{fields.reviewCtaLabel}</div>
-      </div>
-      <div>
-        <div>{fields.acceptToykensLabel}</div>
-        <div>{fields.acceptToykensCtaLabel}</div>
-      </div>
-      <div>
-        <div>{fields.myInventoryCtaLabel}</div>
-        <div>{fields.manageAccountCtaLabel}</div>
-      </div>
-    </div>
+    </>
   );
 };

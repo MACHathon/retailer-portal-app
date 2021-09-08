@@ -4,11 +4,8 @@ import type { Entry } from "contentful";
 
 import { Hero } from "./hero";
 import { Dashboard } from "components/dashboard/retail-dashboard";
-import {
-  PageContentTypes,
-  ComponentContentTypes,
-  PageContentType,
-} from "../../lib/constants";
+import { MainHeader } from "components/shared-components/header/main-header";
+import { ComponentContentTypes, PageContentType } from "../../lib/constants";
 
 type BlockRendererProps = {
   block: any;
@@ -49,7 +46,7 @@ const fromPage = (fieldName: string) => (parent: Entry<unknown>) =>
 const ContentTypeMap = {
   [ComponentContentTypes.ContentCtaBlock]: null,
   [ComponentContentTypes.Dashboard]: Dashboard,
-  [ComponentContentTypes.Header]: null,
+  [ComponentContentTypes.Header]: MainHeader,
   [ComponentContentTypes.Hero]: Hero,
   [PageContentType]: fromPage("content"),
 };
