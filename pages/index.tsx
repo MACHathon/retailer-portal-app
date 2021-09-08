@@ -10,31 +10,51 @@ import {
   LoggedInUserClient,
 } from "../packages/Commercetools/Clients/APIClient";
 import Login from "../components/login/login";
+import { getMe } from "packages/Commercetools/Users/getUser";
+import { createRetailer } from "packages/Commercetools/Users/createUser";
 
 const Home: NextPage = () => {
-  // Sign up to do
-  // useEffect(() => {
-  //   AnonUserClient.me()
-  //     .signup()
-  //     .post({ body: { email: "dave@daveleigh.xyz", password: "password" } })
-  //     .execute()
-  //     .then((x) => {
-  //       console.log(x);
-  //     });
-  // }, []);
-
-  // Once logged in..
-  // LoggedInUserClient
-  //   .me()
-  //   .get()
-  //   .execute()
-  //   .then((x) => {
-  //     console.log(x);
-  //   });
 
   useEffect(() => {
-    window.location.replace(`/${getInitialLocale()}`);
+
+    (async () => {
+
+   
+      // SIGN UP
+      //let retailer = await createRetailer("dave-retailer@gmail.com", "password", "dave books", "bs30 6el", "UK");
+
+      // LOG IN    
+      const tryLogin = await login()
+      
+      const content = await tryLogin.json();
+      console.log(content);
+
+      let me = await getMe();
+
+      console.log("me");
+      console.log(me);
+
+      //window.location.replace(`/${getInitialLocale()}`);
+
+    })();  
   });
+
+  const login = async () => {
+    return await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/login`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "dave-retailer@gmail.com",
+          password: "password",
+        }),
+      }
+    );
+  }
 
   return (
     <div className={styles.container}>
