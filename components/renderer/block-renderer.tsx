@@ -47,8 +47,10 @@ const fromPage = (fieldName: string) => (parent: Entry<unknown>) =>
   <BlockRenderer block={{ ...parent?.fields[fieldName], parent }} />;
 
 const ContentTypeMap = {
-  [ComponentContentTypes.Hero]: Hero,
+  [ComponentContentTypes.ContentCtaBlock]: null,
   [ComponentContentTypes.Dashboard]: Dashboard,
+  [ComponentContentTypes.Header]: null,
+  [ComponentContentTypes.Hero]: Hero,
   [PageContentType]: fromPage("content"),
 };
 
