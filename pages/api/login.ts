@@ -15,17 +15,6 @@ export default async function handler(
   if (req.body.username && req.body.password) {
     let emailAddress = req.body.username;
 
-    // For Child try get email address based on the username provided - Probably not ideal but its a hackathon :)
-    var response = await SecureApiClient.customers()
-      .get({ queryArgs: { where: `companyName = "${req.body.username}"` } })
-      .execute();
-
-    if (response.statusCode == 200) {
-      if (response.body.results.length > 0) {
-        emailAddress = response.body.results[0].email;
-      }
-    }
-
     try {
       var result = await loginClient.customerPasswordFlow(
         {

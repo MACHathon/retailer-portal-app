@@ -12,6 +12,7 @@ import {
 import Login from "../components/login/login";
 import { getMe } from "packages/Commercetools/Users/getUser";
 import { createRetailer } from "packages/Commercetools/Users/createUser";
+import { acceptToykens } from "packages/Commercetools/Toykens/acceptToykens";
 
 const Home: NextPage = () => {
 
@@ -33,6 +34,9 @@ const Home: NextPage = () => {
 
       console.log("me");
       console.log(me);
+
+      // ACCEPT TOYKENS - TO DO @NICK
+      let transfer = await acceptToykens("0069", "", 10);
 
       //window.location.replace(`/${getInitialLocale()}`);
 
