@@ -1,3 +1,5 @@
+export type { TypeComponentContentCtaBlock, TypeComponentContentCtaBlockFields } from "./TypeComponentContentCtaBlock";
+export type { TypeComponentHeader, TypeComponentHeaderFields } from "./TypeComponentHeader";
 export type { TypeComponentRetailerDashboard, TypeComponentRetailerDashboardFields } from "./TypeComponentRetailerDashboard";
 export type { TypeHero, TypeHeroFields } from "./TypeHero";
 export type { TypePage, TypePageFields } from "./TypePage";

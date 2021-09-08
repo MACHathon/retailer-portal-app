@@ -3,13 +3,15 @@ export const SITE_NAME = "Help Center";
 export const PageContentType = "page";
 
 export const ComponentContentTypes = {
-  Hero: "hero",
+  ContentCtaBlock: "componentContentCtaBlock",
   Dashboard: "componentRetailerDashboard",
+  Header: "componentHeader",
+  Hero: "hero",
 };
 
 export const PageContentTypes = {
-  LandingPage: "pageRetailerlanding",
   Dashboard: "pageRetailerDashboard",
+  LandingPage: "pageRetailerlanding",
 };
 
 export const fallbackImage = {

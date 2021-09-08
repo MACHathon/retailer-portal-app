@@ -3,6 +3,7 @@ import { TypeComponentRetailerDashboardFields } from "./TypeComponentRetailerDas
 
 export interface TypePageRetailerDashboardFields {
     name?: Contentful.EntryFields.Symbol;
+    header: Contentful.Entry<Record<string, any>>;
     dashboardComponent: Contentful.Entry<TypeComponentRetailerDashboardFields>;
 }
 
