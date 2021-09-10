@@ -13,6 +13,8 @@ import Login from "../components/login/login";
 import { getMe } from "packages/Commercetools/Users/getUser";
 import { createRetailer } from "packages/Commercetools/Users/createUser";
 import { acceptToykens } from "packages/Commercetools/Toykens/acceptToykens";
+import { getDistance } from "packages/Location/getLocaility";
+import { getRetailerPref, setRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
 
 const Home: NextPage = () => {
 
@@ -35,8 +37,17 @@ const Home: NextPage = () => {
       console.log("me");
       console.log(me);
 
+      //SET RETAILER PREFS
+      let setPrefs = await setRetailerPref(me?.commerceToolsId as string, 20, false, true);
+      let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
+      console.log(getPrefs);
+
       // ACCEPT TOYKENS - TO DO @NICK
-      let transfer = await acceptToykens("0069", "", 10);
+      //let transfer = await acceptToykens("0069", "", 10);
+
+      // GET DISTANCE FOR LOCAL OFFERS
+      //let distance = await getDistance("BS312FJ", "BS306EL");
+      //console.log(Math.round(distance as number) + "km");
 
       //window.location.replace(`/${getInitialLocale()}`);
 
