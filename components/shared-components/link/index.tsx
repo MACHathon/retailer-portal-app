@@ -14,7 +14,7 @@ type LinkProps = {
 
 export const Link = ({ page, path, href, children }: LinkProps) => {
   const { linkTo, linkToPath } = useNavigation();
-  const props = path ? linkToPath(path) : page ? linkTo(page) : { href };
+  const props : any = path ? linkToPath(path) : page ? linkTo(page) : { href };
 
   return <NextLink {...props}>{children}</NextLink>;
 };

@@ -8,7 +8,7 @@ type PageHeadProps = {
 };
 
 export const PageHead = ({ page }: PageHeadProps) => {
-  const seo = page.fields.seo.fields;
+  const seo : any = page?.fields?.seo?.fields;
   const { description = '', keywords = [], title = page.fields.title } = seo;
   const robots = [
     seo.no_index === true ? 'noindex' : undefined,

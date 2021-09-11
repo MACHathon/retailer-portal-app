@@ -5,13 +5,13 @@ import { PageContentType } from './constants';
 import { Locale } from './translations';
 
 const client = createClient({
-  space: process.env.CF_SPACE_ID,
-  accessToken: process.env.CF_DELIVERY_ACCESS_TOKEN,
+  space: process.env.CF_SPACE_ID as string,
+  accessToken: process.env.CF_DELIVERY_ACCESS_TOKEN as string,
 });
 
 const previewClient = createClient({
-  space: process.env.CF_SPACE_ID,
-  accessToken: process.env.CF_PREVIEW_ACCESS_TOKEN,
+  space: process.env.CF_SPACE_ID as string,
+  accessToken: process.env.CF_PREVIEW_ACCESS_TOKEN as string,
   host: 'preview.contentful.com',
 });
 
@@ -37,7 +37,7 @@ export async function getPage(params: GetPageParams) {
   const query = getPageQuery(params);
   const {
     items: [page],
-  } = await getClient(params.preview).getEntries(query);
+  } = await getClient(params.preview as boolean).getEntries(query);
 
   return page ? parsePage(page) : null;
 }
@@ -50,7 +50,7 @@ type GetPagesOfTypeParams = {
 
 export async function getPagesOfType(params: GetPagesOfTypeParams) {
   const { pageContentType, preview, locale } = params;
-  const client = getClient(preview);
+  const client = getClient(preview as boolean);
 
   const { items: pages } = await client.getEntries({
     limit: 100,

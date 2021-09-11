@@ -24,6 +24,7 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
 
   const contentTypeId = _.get(block, "sys.contentType.sys.id");
   const Component = ContentTypeMap[contentTypeId];
+  
 
   if (!Component) {
     console.warn(`${contentTypeId} can not be handled`);
@@ -40,7 +41,8 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
   return <Component key={`${contentTypeId}-${id}`} {...componentProps} />;
 };
 
-const fromPage = (fieldName: string) => (parent: Entry<unknown>) =>
+// eslint-disable-next-line react/display-name
+const fromPage = (fieldName: string) => (parent: Entry<any>) =>
   <BlockRenderer block={{ ...parent?.fields[fieldName], parent }} />;
 
 const ContentTypeMap = {

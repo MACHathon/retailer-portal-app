@@ -1,9 +1,10 @@
+import { ReactElement, JSXElementConstructor, ReactNodeArray, ReactPortal } from "react";
 
 
-const Heading = (props) => {
+export const Heading = (props: { "": string | number | boolean | {} | ReactElement<any, string | JSXElementConstructor<any>> | ReactNodeArray | ReactPortal | null | undefined; }) => {
     return (
         <h2>
-            Welcome {props.}
+            Welcome 
         </h2>
     );
 

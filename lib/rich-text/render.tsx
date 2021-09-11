@@ -8,8 +8,8 @@ export const isRichText = (x: Document | unknown): x is Document => {
   return ['data', 'content', 'nodeType'].every((prop) => has(x, prop));
 };
 
-const PlainHyperlink = (props) => <Hyperlink {...props} type="PlainLink" />;
-const AssetHyperlink = (props) => <Hyperlink {...props} type="AssetLink" />;
+const PlainHyperlink = (props: any) => <Hyperlink {...props} type="PlainLink" />;
+const AssetHyperlink = (props: any) => <Hyperlink {...props} type="AssetLink" />;
 
 export const renderRichText = (rtd: any) =>
   documentToReactComponents(rtd, {

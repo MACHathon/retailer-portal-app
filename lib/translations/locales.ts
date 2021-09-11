@@ -43,7 +43,7 @@ export const withLocale = (
   ) => Promise<GetServerSidePropsResult<Record<string, unknown>>>
 ) => {
   return (context: GetServerSidePropsContext) => {
-    const locale = getLocale(context.params.locale);
+    const locale = getLocale(context.params?.locale);
 
     switch (locale) {
       case UnknownLocale:

@@ -32,7 +32,7 @@ export default function Landing({ page }: LandingProps) {
 
 export const getServerSideProps = withLocale(
   async (locale, { params, query }) => {
-    const slug = String(params.slug ?? "/");
+    const slug = String(params?.slug ?? "/");
     const preview = isPreviewEnabled(query);
     const page = await getPage({
       slug,

@@ -7,6 +7,7 @@ export const ComponentContentTypes = {
   Dashboard: "componentRetailerDashboard",
   Header: "componentHeader",
   Hero: "hero",
+  Text: "text"
 };
 
 export const PageContentTypes = {

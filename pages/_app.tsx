@@ -35,7 +35,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   switch (locale) {
     case UnknownLocale:
-      appContext.ctx.res.writeHead(302, { Location: "/" }).end();
+      appContext?.ctx?.res?.writeHead(302, { Location: "/" }).end();
       break;
     case undefined:
       return { pageProps, ...other };
