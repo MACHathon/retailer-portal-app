@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-types": "dotenv -e .env.local -- cross-var cf-content-types-generator -s %CF_SPACE_ID% -t %CF_CMA_TOKEN% -o lib/types"
+    "generate-types": "dotenv -e .env.local -- cross-var cf-content-types-generator -s %NEXT_PUBLIC_CF_SPACE_ID% -t %NEXT_PUBLIC_CF_CMA_TOKEN% -o lib/types"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.6",

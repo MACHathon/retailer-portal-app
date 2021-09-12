@@ -5,31 +5,26 @@ import { FiChevronDown } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 import { Country } from "types/country";
+import { useCountries } from "@/components/hooks/useCountries";
+import { useContentfulData } from "@/components/hooks/useContentfulData";
+import { TypeComponentHeader } from "lib/types/TypeComponentHeader";
 
-const countries: Country[] = [
-  {
-    country: "United Kingdom",
-    icon: "../../icons/united-kingdom.svg",
-  },
-  {
-    country: "Germany",
-    icon: "../../icons/germany.svg",
-  },
-];
-
-const DropDownSelector = (props: { languageSelectLabel: string }) => {
+const DropDownSelector: NextPage = (): JSX.Element => {
+  const [countries, selectedCountry, setCountry] = useCountries();
   const MotionBox = motion(Box);
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    countries[0].icon
+  const [data, isLoading] = useContentfulData<TypeComponentHeader>(
+    "3L7ODj3p4laQiOOrWnScoZ"
   );
-
   const toggleSelect = (): void => {
     setIsListOpen((prevState) => !prevState);
   };
 
   const selectedCountryItem = (name: string): void => {
-    setSelectedCountry(name);
+    const selectedCountry = countries.filter((c) => c.country === name)[0];
+
+    console.warn(selectedCountry);
+    setCountry(selectedCountry);
     setIsListOpen(false);
   };
 
@@ -45,9 +40,14 @@ const DropDownSelector = (props: { languageSelectLabel: string }) => {
           fontSize={{ base: "0px", md: "18px", lg: "18px" }}
           marginRight="25px"
         >
-          {props.languageSelectLabel}
+          {data.fields?.countrySelectorLabel}
         </Text>
-        <Image src={selectedCountry} alt="country" height="34px" width="34px" />
+        <Image
+          src={selectedCountry?.icon}
+          alt="country"
+          height="34px"
+          width="34px"
+        />
         <Text fontSize="24px" marginLeft="5px">
           <FiChevronDown />
         </Text>
@@ -62,7 +62,7 @@ const DropDownSelector = (props: { languageSelectLabel: string }) => {
                 cursor="pointer"
                 marginBottom="5px"
                 key={index}
-                onClick={() => selectedCountryItem(country.icon)}
+                onClick={() => selectedCountryItem(country.country)}
               >
                 <Image marginRight="10px" src={country.icon} alt="country" />
                 <Text fontSize="18px">{country.country} </Text>

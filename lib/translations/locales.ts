@@ -10,11 +10,10 @@ export const defaultLocale: Locale = "en-GB";
 export const availableLocales: Locale[] = [defaultLocale, "de-DE"];
 
 // for a potential locale picker
-// export const languageNames = {
-//   en: 'English',
-//   fr: 'français',
-//   pl: 'polski'
-// }
+export const languageNames = {
+  en: "English",
+  de: "Deutsch",
+};
 
 export function findLocale(current: Locale): Locale | undefined {
   return availableLocales.find((locale) => current === locale);

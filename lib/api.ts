@@ -1,18 +1,18 @@
-import { createClient } from 'contentful';
+import { createClient } from "contentful";
 
-import { parsePage } from './pageParsers';
-import { PageContentType } from './constants';
-import { Locale } from './translations';
+import { parsePage } from "./pageParsers";
+import { PageContentType } from "./constants";
+import { Locale } from "./translations";
 
 const client = createClient({
-  space: process.env.CF_SPACE_ID as string,
-  accessToken: process.env.CF_DELIVERY_ACCESS_TOKEN as string,
+  space: process.env.NEXT_PUBLIC_CF_SPACE_ID as string,
+  accessToken: process.env.NEXT_PUBLIC_CF_DELIVERY_ACCESS_TOKEN as string,
 });
 
 const previewClient = createClient({
-  space: process.env.CF_SPACE_ID as string,
-  accessToken: process.env.CF_PREVIEW_ACCESS_TOKEN as string,
-  host: 'preview.contentful.com',
+  space: process.env.NEXT_PUBLIC_CF_SPACE_ID as string,
+  accessToken: process.env.NEXT_PUBLIC_CF_PREVIEW_ACCESS_TOKEN as string,
+  host: "preview.contentful.com",
 });
 
 const getClient = (preview: boolean) => (preview ? previewClient : client);
@@ -28,9 +28,9 @@ const getPageQuery = (params: GetPageParams) => ({
   limit: 1,
   include: 10,
   locale: params.locale,
-  'fields.slug': params.slug,
+  "fields.slug": params.slug,
   content_type: PageContentType,
-  'fields.content.sys.contentType.sys.id': params.pageContentType,
+  "fields.content.sys.contentType.sys.id": params.pageContentType,
 });
 
 export async function getPage(params: GetPageParams) {
@@ -56,7 +56,7 @@ export async function getPagesOfType(params: GetPagesOfTypeParams) {
     limit: 100,
     locale,
     content_type: PageContentType,
-    'fields.content.sys.contentType.sys.id': pageContentType,
+    "fields.content.sys.contentType.sys.id": pageContentType,
   });
 
   return pages ? pages.map((page) => parsePage(page)) : [];

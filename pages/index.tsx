@@ -14,21 +14,20 @@ import { getMe } from "packages/Commercetools/Users/getUser";
 import { createRetailer } from "packages/Commercetools/Users/createUser";
 import { acceptToykens } from "packages/Commercetools/Toykens/acceptToykens";
 import { getDistance } from "packages/Location/getLocaility";
-import { getRetailerPref, setRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
+import {
+  getRetailerPref,
+  setRetailerPref,
+} from "packages/Commercetools/Retailer/retailerPref";
 
 const Home: NextPage = () => {
-
   useEffect(() => {
-
     (async () => {
-
-   
       // SIGN UP
       //let retailer = await createRetailer("dave-retailer@gmail.com", "password", "dave books", "bs30 6el", "UK");
 
-      // LOG IN    
-      const tryLogin = await login()
-      
+      // LOG IN
+      const tryLogin = await login();
+
       const content = await tryLogin.json();
       console.log(content);
 
@@ -38,7 +37,12 @@ const Home: NextPage = () => {
       console.log(me);
 
       //SET RETAILER PREFS
-      let setPrefs = await setRetailerPref(me?.commerceToolsId as string, 20, false, true);
+      let setPrefs = await setRetailerPref(
+        me?.commerceToolsId as string,
+        20,
+        false,
+        true
+      );
       let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
       console.log(getPrefs);
 
@@ -50,26 +54,22 @@ const Home: NextPage = () => {
       //console.log(Math.round(distance as number) + "km");
 
       //window.location.replace(`/${getInitialLocale()}`);
-
-    })();  
+    })();
   });
 
   const login = async () => {
-    return await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST}/api/login`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "dave-retailer@gmail.com",
-          password: "password",
-        }),
-      }
-    );
-  }
+    return await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: "dave-retailer@gmail.com",
+        password: "password",
+      }),
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -79,9 +79,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <main className="w-full md:w-96 lg:w-96">
+      <main className="w-full md:w-96 lg:w-96">
         <Login />
-      </main> */}
+      </main>
     </div>
   );
 };

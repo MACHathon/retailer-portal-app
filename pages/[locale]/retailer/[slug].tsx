@@ -19,12 +19,11 @@ export default function Landing({ page }: LandingProps) {
   }
 
   const content = page.fields.content as TypePageRetailerDashboard;
-  const { header = [], dashboardComponent = [] } = content?.fields;
+  const { dashboardComponent = [] } = content?.fields;
 
   return (
     <div className="w-full pb-16 lg:pb-24">
       <PageHead page={page} />
-      <BlockRenderer block={header} />
       <BlockRenderer block={dashboardComponent} />
     </div>
   );

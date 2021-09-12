@@ -7,18 +7,22 @@ import "nprogress/nprogress.css";
 
 import DropDownSelector from "@/components/shared-components/header/drop-down-selector";
 import { TypeComponentHeader } from "lib/types";
+import { NextPage } from "next";
+import { useContentfulData } from "@/components/hooks/useContentfulData";
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-export const MainHeader = ({ fields }: TypeComponentHeader): JSX.Element => {
+export const MainHeader: NextPage = (): JSX.Element => {
   const isLoggedIn: boolean = false;
-
   const router = useRouter();
   const { asPath } = useRouter();
   const currentPath = asPath === "/" ? false : true;
+  const [data, isLoading] = useContentfulData<TypeComponentHeader>(
+    "3L7ODj3p4laQiOOrWnScoZ"
+  );
 
   return (
     <div>
@@ -52,11 +56,11 @@ export const MainHeader = ({ fields }: TypeComponentHeader): JSX.Element => {
               <span>
                 <FiLogOut />
               </span>
-              <Text marginLeft="12px">{fields.logoutLable}</Text>
+              <Text marginLeft="12px">{data?.fields?.logoutLable}</Text>
             </Box>
           )}
         </Box>
-        <DropDownSelector languageSelectLabel={fields.countrySelectorLabel} />
+        <DropDownSelector />
       </Box>
     </div>
   );

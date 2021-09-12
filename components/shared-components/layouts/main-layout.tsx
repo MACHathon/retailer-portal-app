@@ -18,10 +18,10 @@ const MainLayout: NextPage<Props> = ({ children }): JSX.Element => {
       width="100%"
       height="100%"
       minHeight="100vh"
-      bg="#FFF9E4"
+      bg="#FFFFFF"
       padding="3% 10%"
     >
-      {/* <MainHeader /> */}
+      <MainHeader />
       <NotificationMessage
         message={activeNotification.message}
         type={activeNotification.type}

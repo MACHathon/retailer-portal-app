@@ -8,6 +8,7 @@ import MainLayout from "@/components/shared-components/layouts/main-layout";
 import NotificationProvider from "context/notification-context/notification";
 
 import { Fonts } from "../packages/Fonts";
+import CountriesProvider from "context/country-context/country-context";
 
 const theme = extendTheme({
   fonts: {
@@ -20,11 +21,13 @@ function MyApp({ Component, pageProps }: AppProps): ReactNode {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-      <NotificationProvider>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
-      </NotificationProvider>
+      <CountriesProvider>
+        <NotificationProvider>
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
+        </NotificationProvider>
+      </CountriesProvider>
     </ChakraProvider>
   );
 }
