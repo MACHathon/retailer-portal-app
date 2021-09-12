@@ -3,21 +3,27 @@ import { LoggedInUserClient } from "../../packages/Commercetools/Clients/APIClie
 import { Box, Image, Text } from "@chakra-ui/react";
 import TextInputField from "@/components/shared-components/input-fields/text-input-field";
 import ConfirmButton from "@/components/shared-components/buttons/confirm-button";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import ImageFooter from "../shared-components/image-footer/image-footer";
+import { useContentfulData } from "../hooks/useContentfulData";
+import { TypeChildHomepage } from "lib/types";
+import RegisterMeButton from "../shared-components/buttons/register-me-button";
 
 interface LoginProps {}
 
 const Login: React.FC<LoginProps> = ({}) => {
-
   const router = useRouter();
-  const { asPath } = useRouter()
+  const { asPath } = useRouter();
 
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const [isWaiting, setIsWaiting] = React.useState<boolean>(true);
+  const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
   const [isError, setIsError] = React.useState<boolean>(false);
+
+  const [data, isLoading] = useContentfulData<TypeChildHomepage>(
+    "4cS7JUzLdGq5SLfiZ04kjq"
+  );
 
   useEffect(() => {
     LoggedInUserClient.me()
@@ -26,7 +32,7 @@ const Login: React.FC<LoginProps> = ({}) => {
       .then((response: any) => {
         if (!!response?.body?.id) {
           console.log(response);
-          router.push('/dashboard');
+          //router.push('/dashboard');
         }
       })
       .catch((error) => {
@@ -37,17 +43,20 @@ const Login: React.FC<LoginProps> = ({}) => {
 
   const handleLoginClick = () => {
     (async () => {
-      const rawResponse = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/login`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+      const rawResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/login`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        }
+      );
 
       if (rawResponse.status != 200) {
         setIsError(true);
@@ -55,7 +64,7 @@ const Login: React.FC<LoginProps> = ({}) => {
         const content = await rawResponse.json();
 
         if (!!content?.access_token) {
-          router.push('/dashboard');
+          router.push("/dashboard");
           setIsWaiting(false);
         }
       }
@@ -77,23 +86,41 @@ const Login: React.FC<LoginProps> = ({}) => {
       ) : isLoggedIn ? (
         <h1>Logged in</h1>
       ) : (
-        <Box
-          d='flex'
-          flexDirection='column'
-          width='100%'
-        >
-          <Text 
-            width='100%'
-            fontSize='24px' 
-            fontWeight='bold'                            
-            align='center'
-            paddingBottom='2'
+        <Box d="flex" flexDirection="column" width="100%">
+          <Text
+            width="100%"
+            fontSize="24px"
+            fontWeight="bold"
+            align="center"
+            paddingBottom="2"
           >
-            Child login
+            Welcome Back
           </Text>
-          <TextInputField isPassword={false} onChange={handleUsernameChange} placeholder="Your ID" />
-          <TextInputField isPassword={true} onChange={handlePasswordChange} placeholder="Your PIN number" />
+          <TextInputField
+            isPassword={false}
+            onChange={handleUsernameChange}
+            placeholder={data?.fields?.emailInputLabel}
+          />
+          <TextInputField
+            isPassword={true}
+            onChange={handlePasswordChange}
+            placeholder={data?.fields?.passwordInputLabel}
+          />
           <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
+          {isError ? <div>Invalid credentials</div> : null}
+
+          <Text
+            width="100%"
+            fontSize="24px"
+            fontWeight="bold"
+            align="center"
+            paddingBottom="2"
+          >
+            - or -
+          </Text>
+          <RegisterMeButton onClick={handleLoginClick}>
+            Apply to become a Toyken Retailer
+          </RegisterMeButton>
           {isError ? <div>Invalid credentials</div> : null}
           <ImageFooter />
         </Box>
