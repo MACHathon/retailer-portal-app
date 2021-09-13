@@ -57,70 +57,75 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
   return (
     <RetailerLayout>
       <Head>
-        <title>Parent Portal - Dashboard</title>
+        <title>Retail Portal - Dashboard</title>
         <meta name="description" content="Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box d="flex" flexDirection="row" width="50%" margin="0 auto">
-        <Box margin="auto" paddingwidth="75%">
-          {data?.fields?.offersToReviewLabel}
+      <Box d="flex" flexDirection="row" width="60%" margin="0 auto">
+        <Box margin="auto auto auto 0">
+          <Text fontSize="18px">{data?.fields?.offersToReviewLabel}</Text>
         </Box>
         <Button
           bg="#EA6699"
           color="#fff"
           justifyContent="center"
-          height="60px"
-          width="40%"
+          height="40px"
+          min-width="20%"
           borderRadius="10px"
           padding="24px 30px"
-          margin="12px auto"
+          margin="12px 0 12px auto"
           margin-left="auto"
           boxShadow="m"
-          fontSize="24px"
+          fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
           onClick={handleReviewClick}
         >
-          {data?.fields?.reviewCtaLabel} >
+          {data?.fields?.reviewCtaLabel} &gt;
         </Button>
       </Box>
-      <Box d="flex" flexDirection="row" width="50%" margin="0 auto">
-        <Box margin="auto" paddingwidth="75%">
-          {data?.fields?.acceptToykensLabel}
+      <Box d="flex" flexDirection="row" width="60%" margin="0 auto">
+        <Box margin="auto auto auto 0">
+          <Text fontSize="18px">{data?.fields?.acceptToykensLabel}</Text>
         </Box>
         <Button
           bg="#EA6699"
           color="#fff"
-          alignItems="center"
           justifyContent="center"
-          height="60px"
-          width="100%"
+          height="40px"
+          min-width="20%"
           borderRadius="10px"
           padding="24px 30px"
-          margin="12px auto"
+          margin="12px 0 12px auto"
+          margin-left="auto"
           boxShadow="m"
-          fontSize="24px"
+          fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleAcceptTpykensClick}
+          onClick={handleReviewClick}
         >
-          {data?.fields?.acceptToykensCtaLabel} >
+          {data?.fields?.acceptToykensCtaLabel} &gt;
         </Button>
       </Box>
-      <Box d="flex" flexDirection="column" width="50%" margin="0 auto">
+      <Box
+        d="flex"
+        flexDirection="column"
+        width="60%"
+        margin="40px auto auto auto"
+      >
         <Button
           bg="#66B8EC"
           color="#fff"
           alignItems="center"
           justifyContent="center"
-          height="60px"
+          height="40px"
           width="100%"
           borderRadius="10px"
           padding="24px 30px"
           margin="12px auto"
           boxShadow="m"
-          fontSize="24px"
+          fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
           onClick={handleAcceptTpykensClick}
@@ -128,13 +133,13 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           {data?.fields?.myInventoryCtaLabel}
         </Button>
       </Box>
-      <Box d="flex" flexDirection="column" width="50%" margin="0 auto">
+      <Box d="flex" flexDirection="column" width="60%" margin="0 auto">
         <Button
           bg="#fff"
           color="#66B8EC"
           alignItems="center"
           justifyContent="center"
-          height="60px"
+          height="40px"
           width="100%"
           border="1px"
           borderColor="#66B8EC"
@@ -142,7 +147,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           padding="24px 30px"
           margin="12px auto"
           boxShadow="m"
-          fontSize="24px"
+          fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
           onClick={handleAcceptTpykensClick}

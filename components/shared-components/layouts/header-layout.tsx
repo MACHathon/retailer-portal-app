@@ -1,24 +1,23 @@
-import { Box } from "@chakra-ui/react"
-import { NextPage } from "next"
-import { ReactNode } from "react"
+import { Box } from "@chakra-ui/react";
+import { NextPage } from "next";
+import { ReactNode } from "react";
 
 interface Props {
-    children: ReactNode
+  children: ReactNode;
 }
 
 const HeaderLeyout: NextPage<Props> = ({ children }): JSX.Element => {
+  return (
+    <Box
+      d="flex"
+      width="60%"
+      margin="3.5% auto"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      {children}
+    </Box>
+  );
+};
 
-    return(
-        <Box
-            d='flex'
-            width='100%'
-            margin='3.5% auto'
-            justifyContent='space-between'
-            alignItems='center'
-        >
-            { children }
-        </Box>
-    )
-}
-
-export default HeaderLeyout
+export default HeaderLeyout;
