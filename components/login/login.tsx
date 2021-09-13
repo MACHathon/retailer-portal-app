@@ -94,7 +94,7 @@ const Login: React.FC<LoginProps> = ({}) => {
             align="center"
             paddingBottom="2"
           >
-            Welcome Back
+            Welcome to the Retailer portal
           </Text>
           <TextInputField
             isPassword={false}
@@ -122,7 +122,6 @@ const Login: React.FC<LoginProps> = ({}) => {
             Apply to become a Toyken Retailer
           </RegisterMeButton>
           {isError ? <div>Invalid credentials</div> : null}
-          <ImageFooter />
         </Box>
       )}
     </>
