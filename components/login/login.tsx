@@ -64,7 +64,7 @@ const Login: React.FC<LoginProps> = ({}) => {
         const content = await rawResponse.json();
 
         if (!!content?.access_token) {
-          router.push("/dashboard");
+          window.location.href = "/dashboard";
           setIsWaiting(false);
         }
       }
