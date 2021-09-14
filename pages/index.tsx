@@ -14,6 +14,7 @@ import { getMe } from "packages/Commercetools/Users/getUser";
 import { createRetailer } from "packages/Commercetools/Users/createUser";
 import { acceptToykens } from "packages/Commercetools/Toykens/acceptToykens";
 import { getDistance } from "packages/Location/getLocaility";
+import {getToykensForCustomer, incrementToykensForCustomer, decrementToykensForCustomer} from "packages/Commercetools/Toykens/toykenRepository"
 import {
   getRetailerPref,
   setRetailerPref,
@@ -48,6 +49,15 @@ const Home: NextPage = () => {
 
       // ACCEPT TOYKENS - TO DO @NICK
       //let transfer = await acceptToykens("0069", "", 10);
+      let customerId = '41c6e13b-f54c-43df-b65d-9d326e5954de';
+      let toykens = await getToykensForCustomer(customerId);
+      console.log(`User ${customerId} has ${toykens} toykens`);
+      toykens = await incrementToykensForCustomer(customerId);
+      console.log(`After increment User ${customerId} has ${JSON.stringify(toykens)} toykens`);
+      toykens = await decrementToykensForCustomer(customerId);
+      console.log(`After decrement User ${customerId} has ${toykens} toykens`);
+      toykens = await getToykensForCustomer(customerId);
+      console.log(`User ${customerId} has ${toykens} toykens`);
 
       // GET DISTANCE FOR LOCAL OFFERS
       //let distance = await getDistance("BS312FJ", "BS306EL");
