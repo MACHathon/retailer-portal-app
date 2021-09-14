@@ -8,7 +8,7 @@ import { Item } from "pages/dashboard/review-section";
 interface Props {
     items: Item[]
     onRejectHandler: (type: string) => void
-    onAddHandler: (type: string) => void
+    onAddHandler: (type: string, productId: string, sku:string) => void
     buttonLabels?: boolean
 }
 
@@ -161,7 +161,7 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, but
                                 justifyContent='center'
                                 fontSize='50px'
                                 padding='6px'
-                                onClick={() => onAddHandler('add')}
+                                onClick={() => onAddHandler('add', item.commercetoolsProductId, item.commercetoolsSkuId)}
                             >
                                 <IoCheckmarkOutline />
                                 {

@@ -51,7 +51,7 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
           let setPrefs = await setRetailerPref(
             me?.commerceToolsId as string,
             postcode,
-            20,
+            20,     
             false,
             true
           );

@@ -12,9 +12,10 @@ import { Me } from "packages/Commercetools/Users/Me";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
 import { getRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
-import { IoTimeSharp } from "react-icons/io5";
+import { IoCompassSharp, IoTimeSharp } from "react-icons/io5";
 import { getCrow } from "packages/Location/getLocaility";
 import retailer from "pages/[locale]/retailer";
+import { assignItem } from "packages/Commercetools/Items/assignItemToRetailer";
 
 const searchClient = algoliasearch(
   "0E1KIME6XO",
@@ -34,6 +35,7 @@ export type Item = {
   commercetoolsProductId: string,
   image: string,
   distanceKM: number,
+  commercetoolsSkuId: string
 }
 
 
@@ -42,6 +44,7 @@ const ReviewSection: NextPage = (): JSX.Element => {
   const [notificationType, setNotificationType] = useState<string>("");
   const [me, setMe] = React.useState<Me | null>(null);
   const [items, setItems] = React.useState<Item[]>([]);
+  const [assignedLocalCacheWhilstReindex, setAssignedLocalCacheWhilstReindex] = React.useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -116,6 +119,7 @@ const ReviewSection: NextPage = (): JSX.Element => {
           allowedDeliveryOptions: hit.facets["delivery-option"],
           childId: hit.facets["child-id"],
           commercetoolsProductId: hit.id,
+          commercetoolsSkuId: hit.masterVariant.sku,
           condition: hit.facets["toy-condition"],
           description:hit.facets["description"],
           donatorLocationLat: hit.facets["donator-location-lat"],
@@ -133,11 +137,17 @@ const ReviewSection: NextPage = (): JSX.Element => {
        
         newItem.distanceKM = distanceToItem;
         
-        if (newItem.assignedToRetailer == 'unassigned') { // need to fix this in the search query
-          resultItems.push(newItem);
-        }
-       
+       // if (distanceToItem < retailerPreferences.data.maxcollectionDistanceKm)
+        {
+          if (newItem.assignedToRetailer == 'unassigned') { // need to fix this in the search query
 
+            // Don't show items just assigned but not indexed yet
+            if (!assignedLocalCacheWhilstReindex.includes(newItem.commercetoolsProductId)) {
+              resultItems.push(newItem);
+            }
+           
+          }
+        }
       });
 
       setItems(resultItems);
@@ -160,9 +170,16 @@ const ReviewSection: NextPage = (): JSX.Element => {
     setNotificationType(type);
   };
 
-  const onAddHandler = (type: string) => {
+  const onAddHandler = async (type: string, productId: string, sku:string) => {
     setColorNotification(true);
     setNotificationType(type);
+
+    let assigned = await assignItem(me?.commerceToolsId as string,productId,sku, me?.companyName as string, me?.postCode as string);
+    console.log("pid="+productId);
+    console.log("pid="+sku);
+    console.log(assigned);
+
+    setAssignedLocalCacheWhilstReindex( [...assignedLocalCacheWhilstReindex, productId]);
   };
 
   return (

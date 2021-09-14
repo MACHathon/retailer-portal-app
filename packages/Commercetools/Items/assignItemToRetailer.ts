@@ -1,6 +1,6 @@
 import {  LoggedInUserClient } from "../Clients/APIClient";
 
-export const assignItem = async (retailerCommercetoolsId: string, productId:string, sku: string) => {
+export const assignItem = async (retailerCommercetoolsId: string, productId:string, sku: string,retailerName: string, retailerPostcode:string ) => {
 
   var product = await LoggedInUserClient.products().withId({ ID: productId}).get().execute();
   
@@ -12,7 +12,19 @@ export const assignItem = async (retailerCommercetoolsId: string, productId:stri
          action: "setAttribute",
          name: "assigned-to",
          value: retailerCommercetoolsId        
-       }
+       },
+       {
+        sku,
+        action: "setAttribute",
+        name: "assigned-to-name",
+        value: retailerName    
+      },
+      {
+        sku,
+        action: "setAttribute",
+        name: "assigned-to-postcode",
+        value: retailerPostcode   
+      }
      ]
    }}).execute();
 
