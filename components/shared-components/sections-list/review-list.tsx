@@ -8,9 +8,10 @@ interface Props {
     items: any[]
     onRejectHandler: (type: string) => void
     onAddHandler: (type: string) => void
+    buttonLabels?: boolean
 }
 
-const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler}): JSX.Element => {
+const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, buttonLabels}): JSX.Element => {
 
     return (
         <Fragment>
@@ -30,6 +31,7 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler}): J
                         marginBottom='2%'
                         overflow='hidden'
                         marginTop='30px'
+                        boxShadow='xl'
                     >
                         <Box
                             fontFamily='Raleway'
@@ -132,12 +134,24 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler}): J
                                 color='white'
                                 cursor='pointer'
                                 d='flex'
+                                flexDirection='column'
                                 alignItems='center'
                                 justifyContent='center'
-                                fontSize='60px'
+                                fontSize='50px'
+                                padding='6px'
                                 onClick={() => onAddHandler('add')}
                             >
                                 <IoCheckmarkOutline />
+                                {
+                                    buttonLabels
+                                    &&
+                                    <Text
+                                        fontSize='14px'
+                                        textAlign='center'
+                                    >
+                                        Mark as received
+                                    </Text>
+                                }
                             </Box>
                             <Box
                                 bg='#EE0000'
@@ -146,12 +160,24 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler}): J
                                 color='white'
                                 cursor='pointer'
                                 d='flex'
+                                flexDirection='column'
                                 alignItems='center'
                                 justifyContent='center'
-                                fontSize='60px'
+                                fontSize='50px'
+                                padding='6px'
                                 onClick={() => onRejectHandler('reject')}
                             >
                                 <IoCloseOutline />
+                                {
+                                    buttonLabels
+                                    &&
+                                    <Text
+                                        fontSize='14px'
+                                        textAlign='center'
+                                    >
+                                        I’ve changed my mind
+                                    </Text>
+                                }
                             </Box>
                         </Box>
                     </Box>

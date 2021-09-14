@@ -73,6 +73,7 @@ const MyInventory: NextPage = (): JSX.Element => {
                 items={myItems} 
                 onRejectHandler={onRejectHandler}
                 onAddHandler={onAddHandler}
+                buttonLabels
             />
         </Box>
     )
