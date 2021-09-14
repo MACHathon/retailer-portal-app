@@ -42,7 +42,6 @@ const ReviewSection: NextPage = (): JSX.Element => {
   const [notificationType, setNotificationType] = useState<string>("");
   const [me, setMe] = React.useState<Me | null>(null);
   const [items, setItems] = React.useState<Item[]>([]);
-  const [retailerPref, setRetailerPref] = React.useState<any>({});
 
   useEffect(() => {
     (async () => {
@@ -54,10 +53,9 @@ const ReviewSection: NextPage = (): JSX.Element => {
       let retailerPreferences = await getRetailerPref(
         me?.commerceToolsId as string
       );
-
+      
+      console.log("retailerPreferences");
       console.log(retailerPreferences);
-
-      setRetailerPref(retailerPreferences);
 
       let deliveryOptionFilters = [
         "facets.delivery-option:deliver ( within 20 miles )",
@@ -66,9 +64,11 @@ const ReviewSection: NextPage = (): JSX.Element => {
       ];
 
       if (retailerPreferences.data.willCollect) {
+        console.log("willCollect");
         deliveryOptionFilters.push("facets.delivery-option:collection");
       }
       if (retailerPreferences.data.willPayDelivery) {
+        console.log("willPayDelivery");
         deliveryOptionFilters.push("facets.delivery-option:post (retailer pays)");
       }
 
@@ -78,7 +78,7 @@ const ReviewSection: NextPage = (): JSX.Element => {
       );
       const index = searchClient.initIndex("toykens");
 
-      var results = await index.search("assigned-to='unasssigned'", {
+      var results = await index.search("", {
         getRankingInfo: true,
         analytics: false,
         enableABTest: false,
@@ -102,15 +102,13 @@ const ReviewSection: NextPage = (): JSX.Element => {
           "sys.contentType.sys.type",
         ],
         facetFilters: [
-          [
-            "facets.delivery-option:deliver ( within 20 miles )",
-            "facets.delivery-option:drop off locally ( within 5 miles )",
-            "facets.delivery-option:post (ill pay)",
-          ],
+          deliveryOptionFilters,
         ],
       });
 
       let resultItems: Item[] = [];
+
+      console.log( results.hits);
 
       results.hits.forEach((hit: any) => {
         let newItem: Item = {
@@ -128,16 +126,17 @@ const ReviewSection: NextPage = (): JSX.Element => {
           name: hit.name["en-GB"] // TODO other langs
         };
 
-        // Check if is applicable.
-        let distanceToItem = getCrow(newItem.donatorLocationLat, newItem.donatorLocationLon, retailerPref.data.locationLat, retailerPref.data.locationLon);
+        console.log(newItem);
 
-        console.log("retailerPref");
-        console.log(distanceToItem);
+        // Check if is applicable.
+        let distanceToItem = getCrow(newItem.donatorLocationLat, newItem.donatorLocationLon, retailerPreferences.data.locationLat, retailerPreferences.data.locationLon);
+       
         newItem.distanceKM = distanceToItem;
         
-        
-        console.log(newItem);
-        resultItems.push(newItem);
+        if (newItem.assignedToRetailer == 'unassigned') { // need to fix this in the search query
+          resultItems.push(newItem);
+        }
+       
 
       });
 
