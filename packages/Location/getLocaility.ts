@@ -59,6 +59,10 @@ export const getDistance = async (
   }
 };
 
+export const getCrow = (lat1: any, lon1: any, lat2: any, lon2: any) => {
+  return calcCrow(lat1, lon1, lat2, lon2);
+}
+
 function calcCrow(lat1: any, lon1: any, lat2: any, lon2: any) {
   var R = 6371; // km
   var dLat = toRad(lat2 - lat1);

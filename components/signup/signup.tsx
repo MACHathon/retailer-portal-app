@@ -1,111 +1,84 @@
+import { Box } from "@chakra-ui/react";
 import {
   CustomFields,
   FieldContainer,
   TypeReference,
 } from "@commercetools/platform-sdk/dist/generated/models/type";
+import { setRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
+import { getMe } from "packages/Commercetools/Users/getUser";
 import React, { useState, useEffect } from "react";
 import { AnonUserClient } from "../../packages/Commercetools/Clients/APIClient"
 
 interface SignUpProps {}
 
 const SignUp: React.FC<SignUpProps> = ({}) => {
-  const [parentEmail, setParentEmail] = React.useState<string>("");
-  const [parentPassword, setParentPassword] = React.useState<string>("");
-  const [parentName, setParentName] = React.useState<string>("");
-
-  const [username, setUsername] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [retailerName, setRetailerName] = React.useState<string>("");
+  const [postcode, setPostcode] = React.useState<string>("");
+
   
   const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   const [signUpcomplete, setIsLoggedIn] = React.useState<boolean>(false);
   const [isError, setIsError] = React.useState<boolean>(false);
 
-  // useEffect(() => {
-  //   LoggedInUserClient.me()
-  //     .get()
-  //     .execute()
-  //     .then((response: any) => {
-  //       if (!!response?.body?.id) {
-  //         console.log(response);
-  //         setIsLoggedIn(true);
-  //         setIsWaiting(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setIsWaiting(false);
-  //     });
-  // }, []);
 
   const handleSignUpClick = () => {
     (async () => {
 
-      // Register Parent
-      let parentResponse = await AnonUserClient.me()
+      let response = await AnonUserClient.me()
         .signup()
         .post({
           body: {
-            email: parentEmail,
-            password: parentPassword,
-            firstName: parentName, 
-            // Link the child
-            companyName: `${username}-child@toyken.org` // Should use a custom field but for times sake hacking it
-          },
-        })
-        .execute();
-      
-      if (parentResponse.statusCode == 201) {
-        
-        console.log(parentResponse);
-        
-        // Register Child
-
-        let response = await AnonUserClient.me()
-        .signup()
-        .post({
-          body: {
-            email: `${username}-child@toyken.org`,
+            email: email,
             password: password,
-            firstName: username, // Should use a custom field but for times sake hacking it
+            companyName: retailerName,
+            addresses: [
+              {
+                postalCode: postcode,
+                country: "UK"     // Future TODO country input. 
+              },
+            ]
           },
         })
-        .execute();
-
-        console.log(response);
+        .execute();      
 
         if (response.statusCode == 201) {
+
+          let me = await getMe();
+
+          // Set some default prefs
+          let setPrefs = await setRetailerPref(
+            me?.commerceToolsId as string,
+            postcode,
+            20,
+            false,
+            true
+          );
+
           setIsLoggedIn(true);
           setIsWaiting(false);
         } else {
           setIsWaiting(false);
           setIsError(true);
         }
-        
-      } else {
-        setIsWaiting(false);
-        setIsError(true);
-      }
     })();
   };
 
-  const handleParentNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setParentName(event.target.value);
+  const handleRetailerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRetailerName(event.target.value);
   };
 
-  const handleParentEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setParentEmail(event.target.value);
-  };
-
-  const handleParentPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setParentPassword(event.target.value);
-  };
-
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  };
+
+  const handlePostcodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPostcode(event.target.value);
   };
 
   return (
@@ -115,46 +88,46 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
       ) : signUpcomplete ? (
         <h1>Success!</h1>
       ) : (
-        <div className="w-1/4">
+        <Box d="flex" flexDirection="column" width="100%" marginTop="0">
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
               htmlFor="name"
             >
-              Your name (Parent)
+              Business / Charity name
             </label>
             <input
               className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
               id="name"
-              onChange={handleParentNameChange}
-              placeholder="Your Name"
+              onChange={handleRetailerNameChange}
+              placeholder="Business / Charity name"
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="parentEmail"
+              htmlFor="email"
             >
-              Email address (Parent)
+              Your Email address
             </label>
             <input
               className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-              id="parentEmail"
-              onChange={handleParentEmailChange}
+              id="email"
+              onChange={handleEmailChange}
               placeholder="Email address"
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="parentPassword"
+              htmlFor="password"
             >
-              Password (Parent)
+              Password
             </label>
             <input
               className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-              id="parentPassword"
-              onChange={handleParentPasswordChange}
+              id="password"
+              onChange={handlePasswordChange}
               placeholder="Password"
               type="password"
             />
@@ -162,31 +135,19 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="postcode"
             >
-              Username for your child
+              Postcode
             </label>
             <input
               className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-              id="username"
-              onChange={handleUsernameChange}
-              placeholder="Username"
+              id="postcode"
+              onChange={handlePostcodeChange}
+              placeholder="Postcode"
             />
           </div>
-          <div className="mb-6">
-            <label
-              className="block text-grey-darker text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Choose a PIN number for your child
-            </label>
-            <input
-              className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-              id="password"
-              onChange={handlePasswordChange}
-              placeholder="PIN"
-            />
-          </div>
+        
+         
           <div className="flex items-center justify-between">
             <button
               className="w-full bg-green-600 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
@@ -198,7 +159,7 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
               {isError ? <div>Error...</div> : null}
             </p>
           </div>
-        </div>
+        </Box>
       )}
     </>
   );

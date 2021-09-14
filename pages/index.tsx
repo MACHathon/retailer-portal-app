@@ -38,12 +38,13 @@ const Home: NextPage = () => {
       console.log(me);
 
       //SET RETAILER PREFS
-      let setPrefs = await setRetailerPref(
-        me?.commerceToolsId as string,
-        20,
-        false,
-        true
-      );
+      // let setPrefs = await setRetailerPref(
+      //   me?.commerceToolsId as string,
+      //   "BS30 6EL",
+      //   20,
+      //   false,
+      //   true
+      // );
       let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
       console.log(getPrefs);
 

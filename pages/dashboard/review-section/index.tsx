@@ -1,4 +1,4 @@
-import { NextPage } from "next"
+import { NextPage } from "next";
 
 import TitleField from "@/components/shared-components/text-fields/title-field";
 import { Box } from "@chakra-ui/layout";
@@ -6,98 +6,182 @@ import ReviewHeader from "@/components/shared-components/review-section-header/r
 import ReviewList from "@/components/shared-components/sections-list/review-list";
 import ColorNotification from "@/components/shared-components/sections/color-notification";
 import { useEffect, useState } from "react";
+import { getMe } from "packages/Commercetools/Users/getUser";
+import React from "react";
+import { Me } from "packages/Commercetools/Users/Me";
+import algoliasearch from "algoliasearch/lite";
+import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
+import { getRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
+import { IoTimeSharp } from "react-icons/io5";
+import { getCrow } from "packages/Location/getLocaility";
+import retailer from "pages/[locale]/retailer";
 
-const reviewItems = [
-    {
-        id: "1",
-        name: "Transformer White/Blue",
-        image: "../../images/toy-example-image.png",
-        type: "Plastic Toy",
-        condition: "New",
-        deliver: true,
-        collection: true,
-        drop_locally: true
-    },
-    {
-        id: "2",
-        name: "Transformer Optimus Prime",
-        image: "../../images/toy-example-image.png",
-        type: "Plastic Toy",
-        condition: "New",
-        deliver: false,
-        collection: true,
-        drop_locally: true
-    },
-    {
-        id: "3",
-        name: "Transformer Optimus Prime",
-        image: "../../images/toy-example-image.png",
-        type: "Plastic Toy",
-        condition: "New",
-        deliver: true,
-        collection: false,
-        drop_locally: false
-    },
-    {
-        id: "4",
-        name: "Transformer White/Blue",
-        image: "../../images/toy-example-image.png",
-        type: "Plastic Toy",
-        condition: "Used",
-        deliver: false,
-        collection: true,
-        drop_locally: true
-    },
-]
+const searchClient = algoliasearch(
+  "0E1KIME6XO",
+  "2835d4eac134b9e056601f8140effc1b"
+);
 
-const ReviewSection: NextPage = (): JSX.Element => {
-
-    const [ colorNotification, setColorNotification ] = useState<boolean>(false);
-    const [ notificationType, setNotificationType ] = useState<string>('')
-
-    useEffect(() => {
-        if(colorNotification){
-            const timer = setTimeout(() => {
-                setColorNotification(false);
-            }, 2500);
-
-            return () => {
-                clearTimeout(timer);
-            }
-        }
-    }, [colorNotification]);
-
-    const onRejectHandler = (type: string) => {
-        setColorNotification(true)
-        setNotificationType(type)
-    }
-
-    const onAddHandler = (type: string) => {
-        setColorNotification(true)
-        setNotificationType(type)
-    }
-
-    return (
-        <Box
-            margin='50px 0'
-        >
-            <TitleField 
-                fontSize='56px'
-                color='#333333'
-            >
-                Review Offers
-            </TitleField>
-            <ReviewHeader />
-            {
-                colorNotification && <ColorNotification  notificationType={notificationType}/>
-            }        
-            <ReviewList 
-                items={reviewItems} 
-                onRejectHandler={onRejectHandler}
-                onAddHandler={onAddHandler}
-            />
-        </Box>
-    )
+export type Item = {
+  assignedToRetailer: string,
+  childId: string,
+  allowedDeliveryOptions: string[],
+  name: string,
+  description: string,
+  donatorLocationLat: number,
+  donatorLocationLon: number,
+  donatorPostcode: string,
+  condition: string,
+  commercetoolsProductId: string,
+  image: string,
+  distanceKM: number,
 }
 
-export default ReviewSection
+
+const ReviewSection: NextPage = (): JSX.Element => {
+  const [colorNotification, setColorNotification] = useState<boolean>(false);
+  const [notificationType, setNotificationType] = useState<string>("");
+  const [me, setMe] = React.useState<Me | null>(null);
+  const [items, setItems] = React.useState<Item[]>([]);
+  const [retailerPref, setRetailerPref] = React.useState<any>({});
+
+  useEffect(() => {
+    (async () => {
+      let me = await getMe();
+      setMe(me);
+      console.log("Me:");
+      console.log(me);
+
+      let retailerPreferences = await getRetailerPref(
+        me?.commerceToolsId as string
+      );
+
+      console.log(retailerPreferences);
+
+      setRetailerPref(retailerPreferences);
+
+      let deliveryOptionFilters = [
+        "facets.delivery-option:deliver ( within 20 miles )",
+        "facets.delivery-option:drop off locally ( within 5 miles )",
+        "facets.delivery-option:post (ill pay)",
+      ];
+
+      if (retailerPreferences.data.willCollect) {
+        deliveryOptionFilters.push("facets.delivery-option:collection");
+      }
+      if (retailerPreferences.data.willPayDelivery) {
+        deliveryOptionFilters.push("facets.delivery-option:post (retailer pays)");
+      }
+
+      const searchClient = algoliasearch(
+        "0E1KIME6XO",
+        "2835d4eac134b9e056601f8140effc1b"
+      );
+      const index = searchClient.initIndex("toykens");
+
+      var results = await index.search("assigned-to='unasssigned'", {
+        getRankingInfo: true,
+        analytics: false,
+        enableABTest: false,
+        hitsPerPage: 10,
+        attributesToRetrieve: "*",
+        attributesToSnippet: "*:20",
+        snippetEllipsisText: "…",
+        responseFields: "*",
+        explain: "*",
+        page: 0,
+        maxValuesPerFacet: 100,
+        facets: [
+          "*",
+          "facets.age-range",
+          "facets.brand",
+          "facets.colour",
+          "facets.delivery-option",
+          "facets.description",
+          "facets.has-box-or-wrapper",
+          "facets.toy-condition",
+          "sys.contentType.sys.type",
+        ],
+        facetFilters: [
+          [
+            "facets.delivery-option:deliver ( within 20 miles )",
+            "facets.delivery-option:drop off locally ( within 5 miles )",
+            "facets.delivery-option:post (ill pay)",
+          ],
+        ],
+      });
+
+      let resultItems: Item[] = [];
+
+      results.hits.forEach((hit: any) => {
+        let newItem: Item = {
+          assignedToRetailer: hit.facets["assigned-to"],
+          allowedDeliveryOptions: hit.facets["delivery-option"],
+          childId: hit.facets["child-id"],
+          commercetoolsProductId: hit.id,
+          condition: hit.facets["toy-condition"],
+          description:hit.facets["description"],
+          donatorLocationLat: hit.facets["donator-location-lat"],
+          donatorLocationLon: hit.facets["donator-location-lon"],
+          donatorPostcode: hit.facets["donator-postcode"],
+          image: "../../images/toy-example-image.png",
+          distanceKM: 0,
+          name: hit.name["en-GB"] // TODO other langs
+        };
+
+        // Check if is applicable.
+        let distanceToItem = getCrow(newItem.donatorLocationLat, newItem.donatorLocationLon, retailerPref.data.locationLat, retailerPref.data.locationLon);
+
+        console.log("retailerPref");
+        console.log(distanceToItem);
+        newItem.distanceKM = distanceToItem;
+        
+        
+        console.log(newItem);
+        resultItems.push(newItem);
+
+      });
+
+      setItems(resultItems);
+
+    })();
+
+    if (colorNotification) {
+      const timer = setTimeout(() => {
+        setColorNotification(false);
+      }, 2500);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [colorNotification]);
+
+  const onRejectHandler = (type: string) => {
+    setColorNotification(true);
+    setNotificationType(type);
+  };
+
+  const onAddHandler = (type: string) => {
+    setColorNotification(true);
+    setNotificationType(type);
+  };
+
+  return (
+    <Box margin="50px 0">
+      <TitleField fontSize="56px" color="#333333">
+        Review Offers
+      </TitleField>
+      <ReviewHeader />
+      {colorNotification && (
+        <ColorNotification notificationType={notificationType} />
+      )}
+      <ReviewList
+        items={items}
+        onRejectHandler={onRejectHandler}
+        onAddHandler={onAddHandler}
+      />
+    </Box>
+  );
+};
+
+export default ReviewSection;

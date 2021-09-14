@@ -41,6 +41,10 @@ const Login: React.FC<LoginProps> = ({}) => {
       });
   }, []);
 
+  const handleRegisterClick = () => {
+    window.location.href = "/register";
+  }
+
   const handleLoginClick = () => {
     (async () => {
       const rawResponse = await fetch(
@@ -118,7 +122,7 @@ const Login: React.FC<LoginProps> = ({}) => {
           >
             - or -
           </Text>
-          <RegisterMeButton onClick={handleLoginClick}>
+          <RegisterMeButton onClick={handleRegisterClick}>
             Apply to become a Toyken Retailer
           </RegisterMeButton>
           {isError ? <div>Invalid credentials</div> : null}

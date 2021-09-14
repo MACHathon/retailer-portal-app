@@ -1,6 +1,9 @@
-export const setRetailerPref = async (retailerId:string, maxcollectionDistanceKm: number, willPayDelivery: boolean, willCollect: boolean) => {
+export const setRetailerPref = async (retailerId:string, retailerPostcode:string, maxcollectionDistanceKm: number, willPayDelivery: boolean, willCollect: boolean) => {
 
+    // Get lat lon
+    let latlon = await getLatLon(retailerPostcode);
     
+
     const rawResponse = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/setRetailerPref`, {
         method: "POST",
         headers: {
@@ -11,7 +14,9 @@ export const setRetailerPref = async (retailerId:string, maxcollectionDistanceKm
             retailerId:retailerId,
             maxcollectionDistanceKm: maxcollectionDistanceKm,
             willPayDelivery: willPayDelivery,
-            willCollect: willCollect
+            willCollect: willCollect,
+            locationLat: latlon?.lat,
+            locationLon: latlon?.lon,
         }),
       });
 
@@ -23,6 +28,35 @@ export const setRetailerPref = async (retailerId:string, maxcollectionDistanceKm
         console.log(content);
       }
    
+};
+
+const getLatLon = async (
+  postcode: string
+) => {
+  let rawResponse = await fetch(
+    `https://api.postcodes.io/postcodes/${postcode}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (rawResponse.status != 200) {
+    // handle error
+    console.log("error");
+    console.log(rawResponse);
+  } else {
+    const content = await rawResponse.json();
+
+    let lat = content.result.latitude;
+    let lon = content.result.longitude;
+
+    return { lat, lon }
+   
+    }
 };
 
 export const getRetailerPref = async (retailerId:string) => {
@@ -43,7 +77,7 @@ export const getRetailerPref = async (retailerId:string) => {
       } else {
         const content = await rawResponse.json();
 
-        console.log(content);
+        return content;
       }
    
 };

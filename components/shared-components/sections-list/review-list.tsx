@@ -3,9 +3,10 @@ import { Fragment } from "react";
 import { IoCloseOutline, IoCheckmarkOutline } from 'react-icons/io5'
 
 import { Box, Text, Image } from "@chakra-ui/react";
+import { Item } from "pages/dashboard/review-section";
 
 interface Props {
-    items: any[]
+    items: Item[]
     onRejectHandler: (type: string) => void
     onAddHandler: (type: string) => void
     buttonLabels?: boolean
@@ -17,10 +18,10 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, but
         <Fragment>
         {
             items &&
-            items.map((item: any) => {
+            items.map((item: Item) => {
                 return (
                     <Box
-                        key={ item.id }
+                        key={ item.commercetoolsProductId }
                         d='flex'
                         justifyContent='space-between'
                         alignItems='center'
@@ -54,10 +55,17 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, but
                                 padding='25px 0'
                             >
                                 <Text
-                                    fontSize='38px'
+                                    fontSize='30px'
                                     color='#333333'
                                 > 
-                                    { item.name } 
+                                    { item.name } ({Math.round(item.distanceKM)}km away)
+                                </Text>
+                                <Text
+                                    fontSize='18px'
+                                    color='#333333'
+                                    marginBottom="10px"
+                                > 
+                                    { item.description } 
                                 </Text>
                                 <Box
                                     d='flex'
@@ -67,7 +75,7 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, but
                                         fontSize='22px'
                                         color='#333333'
                                     > 
-                                        { item.type } - Condition: 
+                                        Condition: 
                                     </Text>
                                     <Text
                                         fontSize='22px'
@@ -82,43 +90,57 @@ const ReviewList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, but
                                     marginTop='20px'
                                 >
                                     {
-                                         item.drop_locally 
+                                         (item.allowedDeliveryOptions.indexOf("drop off locally ( within 5 miles )") > -1 || item.allowedDeliveryOptions.indexOf("deliver ( within 20 miles )") > -1)
                                          && <Text
-                                                 fontSize='22px'
+                                                 fontSize='16px'
                                                  color='#333333'
                                                  bg='#E8E8E8'
                                                  padding='4px 8px'
                                                  textAlign='center'
                                                  marginRight='20px'
                                              >
-                                                 Drop off locally
+                                                Donator will deliver
                                              </Text>
 
                                     }
                                     {
-                                        item.deliver 
+                                        item.allowedDeliveryOptions.indexOf("post (ill pay)") > -1
                                         && <Text
-                                                fontSize='22px'
+                                                fontSize='16px'
                                                 color='#333333'
                                                 bg='#E8E8E8'
                                                 padding='4px 8px'
                                                 textAlign='center'
                                                 marginRight='20px'
                                             >
-                                                Deliver
+                                                Donator arranges delivery
                                             </Text>
                                     }
                                      {
-                                        item.collection 
+                                        item.allowedDeliveryOptions.indexOf("post (retailer pays)") > -1
                                         && <Text
-                                                fontSize='22px'
+                                                fontSize='16px'
                                                 color='#333333'
                                                 bg='#E8E8E8'
                                                 padding='4px 8px'
                                                 textAlign='center'
                                                 marginRight='20px'
                                             >
-                                                Collection (20 km away)
+                                                Retailer arranges postage
+                                            </Text>
+                                    }
+                                      
+                                     {
+                                        item.allowedDeliveryOptions.indexOf("collection") > -1
+                                        && <Text
+                                                fontSize='16px'
+                                                color='#333333'
+                                                bg='#E8E8E8'
+                                                padding='4px 8px'
+                                                textAlign='center'
+                                                marginRight='20px'
+                                            >
+                                                Local collection
                                             </Text>
                                     }
                                 </Box>

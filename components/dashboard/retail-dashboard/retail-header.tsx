@@ -19,7 +19,7 @@ export const RetailHeader = (props: RetailHeaderProps): JSX.Element => {
     (async () => {
       let me = await getMe();
       setMe(me);
-      console.log("me hi");
+      console.log("Me:");
       console.log(me);
     })();
   }, []);

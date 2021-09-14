@@ -13,16 +13,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  // @Nick - Can you fill in this code?
+
   let retailerId: string = req.body.retailerId;
   let maxcollectionDistanceKm: number = req.body.maxcollectionDistanceKm;
   let willPayDelivery: boolean = req.body.willPayDelivery;
   let willCollect: boolean = req.body.willCollect;
+  let locationLat: number = req.body.locationLat;
+  let locationLon: number = req.body.locationLon;
 
   let data = {
     maxcollectionDistanceKm: maxcollectionDistanceKm,
     willPayDelivery: willPayDelivery,
-    willCollect: willCollect
+    willCollect: willCollect,
+    locationLat,
+    locationLon
   }
 
   SecureApiClient.customObjects()

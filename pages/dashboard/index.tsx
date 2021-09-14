@@ -54,6 +54,26 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
     }
   };
 
+  const onRedirectHandler = async () => {
+    const rawResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/logout`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Deleeting cookies... never easy
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+    if (rawResponse.status == 200) {
+      window.location.href = "/";
+    }
+  };
+
   return (
     <RetailerLayout>
       <Head>
@@ -157,6 +177,20 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         >
           {data?.fields?.manageAccountCtaLabel}
         </Button>
+      </Box>
+      <Box d="flex" flexDirection="column" width="60%" margin="0 auto" marginTop="20" height="70px">
+      <Button
+        height="72px"
+        backgroundColor="#ff7b7b"
+        textColor="#FFF"
+        onClick={onRedirectHandler}
+        paddingLeft="30"
+        paddingRight="30"
+        width="200px"
+        
+      >
+        Logout
+      </Button>
       </Box>
     </RetailerLayout>
   );
