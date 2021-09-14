@@ -13,8 +13,7 @@ const AccountsSection: NextPage<Props> = ({ onSectionSwitch, profiles }): JSX.El
     return (
         <ColourSection 
             bgColour='#EA6699'
-            thumbColor='#EAD0DA'
-            trackColor='#B85078'
+         
         >
             <OpenFormButton 
                 onClick={onSectionSwitch}

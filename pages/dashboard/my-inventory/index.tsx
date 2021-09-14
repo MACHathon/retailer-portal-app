@@ -4,8 +4,9 @@ import { NextPage } from "next"
 import HeaderLeyout from "@/components/shared-components/layouts/header-layout"
 import ReviewHeader from "@/components/shared-components/review-section-header/review-header"
 import ClientInfo from "@/components/shared-components/client-info/client-info"
-import MessagesNotification from "@/components/dashboard/parent-dashboard/parent-header/header-element/messages-notification"
 import ReviewList from "@/components/shared-components/sections-list/review-list"
+import React from "react"
+import MessagesNotification from "@/components/dashboard/retail-dashboard/header-element/messages-notification"
 
 const myItems = [
     {
@@ -69,12 +70,12 @@ const MyInventory: NextPage = (): JSX.Element => {
                 <MessagesNotification />
             </HeaderLeyout>
             <ReviewHeader serachBar support/>
-            <ReviewList 
+            {/* <ReviewList 
                 items={myItems} 
                 onRejectHandler={onRejectHandler}
                 onAddHandler={onAddHandler}
                 buttonLabels
-            />
+            /> */}
         </Box>
     )
 }

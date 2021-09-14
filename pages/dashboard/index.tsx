@@ -4,7 +4,6 @@ import { Box, Text, Button } from "@chakra-ui/react";
 import Head from "next/head";
 import { AiTwotoneStar } from "react-icons/ai";
 import { RiUserHeartFill } from "react-icons/ri";
-import SectionButton from "@/components/dashboard/parent-dashboard/parent-sections/section-button/section-button";
 import { ParentSection } from "types/parent-section";
 import { useRouter } from "next/router";
 import RetailerLayout from "@/components/shared-components/layouts/retailer-layout";
