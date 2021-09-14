@@ -62,16 +62,17 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box d="flex" flexDirection="row" width="60%" margin="0 auto">
+      <Box d="flex" flexDirection="row" width="60%" margin="0 auto" height="100px">
         <Box margin="auto auto auto 0">
-          <Text fontSize="18px">{data?.fields?.offersToReviewLabel}</Text>
+          <Text fontSize="20px">{data?.fields?.offersToReviewLabel}</Text>
         </Box>
         <Button
           bg="#EA6699"
           color="#fff"
           justifyContent="center"
-          height="40px"
-          min-width="20%"
+          height="70px"
+          min-width="200px"
+          width="200px"
           borderRadius="10px"
           padding="24px 30px"
           margin="12px 0 12px auto"
@@ -85,16 +86,17 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           {data?.fields?.reviewCtaLabel} &gt;
         </Button>
       </Box>
-      <Box d="flex" flexDirection="row" width="60%" margin="0 auto">
+      <Box d="flex" flexDirection="row" width="60%" margin="0 auto" height="100px">
         <Box margin="auto auto auto 0">
-          <Text fontSize="18px">{data?.fields?.acceptToykensLabel}</Text>
+          <Text fontSize="20px">{data?.fields?.acceptToykensLabel}</Text>
         </Box>
         <Button
           bg="#EA6699"
           color="#fff"
           justifyContent="center"
-          height="40px"
-          min-width="20%"
+          height="70px"
+          min-width="200px"
+          width="200px"
           borderRadius="10px"
           padding="24px 30px"
           margin="12px 0 12px auto"
@@ -113,13 +115,14 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         flexDirection="column"
         width="60%"
         margin="40px auto auto auto"
+        height="100px"
       >
         <Button
           bg="#66B8EC"
           color="#fff"
           alignItems="center"
           justifyContent="center"
-          height="40px"
+          height="70px"
           width="100%"
           borderRadius="10px"
           padding="24px 30px"
@@ -133,13 +136,13 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           {data?.fields?.myInventoryCtaLabel}
         </Button>
       </Box>
-      <Box d="flex" flexDirection="column" width="60%" margin="0 auto">
+      <Box d="flex" flexDirection="column" width="60%" margin="0 auto" height="70px">
         <Button
           bg="#fff"
           color="#66B8EC"
           alignItems="center"
           justifyContent="center"
-          height="40px"
+          height="70px"
           width="100%"
           border="1px"
           borderColor="#66B8EC"

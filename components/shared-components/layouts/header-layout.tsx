@@ -10,10 +10,8 @@ const HeaderLeyout: NextPage<Props> = ({ children }): JSX.Element => {
   return (
     <Box
       d="flex"
-      width="100%"
-      margin="3.5% auto"
-      justifyContent="space-between"
-      alignItems="center"
+      flexDirection="row" width="60%" margin="3.5% auto"
+      alignItems="left"
     >
       {children}
     </Box>

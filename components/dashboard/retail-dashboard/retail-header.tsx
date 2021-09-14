@@ -19,7 +19,7 @@ export const RetailHeader = (props: RetailHeaderProps): JSX.Element => {
     (async () => {
       let me = await getMe();
       setMe(me);
-      console.log("me");
+      console.log("me hi");
       console.log(me);
     })();
   }, []);
@@ -27,7 +27,7 @@ export const RetailHeader = (props: RetailHeaderProps): JSX.Element => {
   return (
     <HeaderLeyout>
       <ClientInfo message={`${props.welcomeMessage} ${me?.companyName}`} />
-      <MessagesNotification />
+      {/* <MessagesNotification /> */}
     </HeaderLeyout>
   );
 };

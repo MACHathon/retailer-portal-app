@@ -44,9 +44,9 @@ const ClientInfo: NextPage<Props> = ({ image, message }): JSX.Element => {
         ></Image>
       )}
       <MotionText
-        marginLeft="1%"
+        marginLeft="0%"
         fontFamily="Raleway"
-        fontSize="30px"
+        fontSize="36px"
         fontWeight="700"
         variants={sentence}
         initial="hidden"
