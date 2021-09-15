@@ -29,3 +29,25 @@ export const acceptToykens = async (childId:string, itemType: string, numberOfTo
         }
       );
 };
+
+export const rewardToykens = async (childId:string, numberOfToykens: number) => {
+
+  // ItemType not applicable for MVP
+  //const me = await getMe();
+
+  return await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/rewardToykens`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         // retailerId: me?.commerceToolsId,      // Not needed MVP as retailer doesn't receive the toykens, they are simply deducted from child account
+          childShortId: childId,                   //Not secure but OK for MVP. For real we would scan the childs QR which would use their guid.
+          quantity: numberOfToykens,
+        }),
+      }
+    );
+};

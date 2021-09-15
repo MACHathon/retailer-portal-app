@@ -30,7 +30,7 @@ export default async function handler(
       
       for (let i = 0; i < quantity; i++)
       {
-        await decrementToykensForCustomer(childCommercetoolsId);
+        await incrementToykensForCustomer(childCommercetoolsId);
       }     
     }
   }

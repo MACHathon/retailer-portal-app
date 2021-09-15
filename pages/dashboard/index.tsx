@@ -41,6 +41,9 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
   const handleManageMyAccountClick = () => {
     window.location.href = "dashboard/retail-sections/receive-form";
   }
+  const handleManageInventoryClick = () => {
+    window.location.href = "dashboard/my-inventory";
+  }
 
   const onRedirectHandler = async () => {
     const rawResponse = await fetch(
@@ -156,7 +159,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleAcceptToykensClick}
+          onClick={handleManageInventoryClick}
         >
           {data?.fields?.myInventoryCtaLabel}
         </Button>

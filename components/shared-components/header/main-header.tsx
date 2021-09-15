@@ -41,7 +41,7 @@ export const MainHeader: NextPage = (): JSX.Element => {
               width="175px"
               height="45px"
               cursor={currentPath ? "pointer" : "default"}
-              onClick={currentPath ? () => router.push("/") : undefined}
+              onClick={currentPath ? () => router.push("/dashboard") : undefined}
             />
           ) : (
             <Box

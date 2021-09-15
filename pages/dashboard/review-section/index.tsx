@@ -35,7 +35,8 @@ export type Item = {
   commercetoolsProductId: string,
   image: string,
   distanceKM: number,
-  commercetoolsSkuId: string
+  commercetoolsSkuId: string,
+  received:boolean
 }
 
 
@@ -127,7 +128,8 @@ const ReviewSection: NextPage = (): JSX.Element => {
           donatorPostcode: hit.facets["donator-postcode"],
           image: "../../images/toy-example-image.png",
           distanceKM: 0,
-          name: hit.name["en-GB"] // TODO other langs
+          name: hit.name["en-GB"],
+          received:false // TODO other langs
         };
 
         console.log(newItem);
@@ -137,7 +139,7 @@ const ReviewSection: NextPage = (): JSX.Element => {
        
         newItem.distanceKM = distanceToItem;
         
-       // if (distanceToItem < retailerPreferences.data.maxcollectionDistanceKm)
+        if (distanceToItem < retailerPreferences.data.maxcollectionDistanceKm)
         {
           if (newItem.assignedToRetailer == 'unassigned') { // need to fix this in the search query
 
