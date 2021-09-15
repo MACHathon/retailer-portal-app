@@ -43,7 +43,7 @@ const Login: React.FC<LoginProps> = ({}) => {
 
   const handleRegisterClick = () => {
     window.location.href = "/register";
-  }
+  };
 
   const handleLoginClick = () => {
     (async () => {
@@ -111,7 +111,7 @@ const Login: React.FC<LoginProps> = ({}) => {
             placeholder={data?.fields?.passwordInputLabel}
           />
           <ConfirmButton onClick={handleLoginClick}>Login</ConfirmButton>
-          {isError ? <div>Invalid credentials</div> : null}
+          {isError ? <div>{data?.fields?.invalidCredentialsLabel}</div> : null}
 
           <Text
             width="100%"
@@ -125,7 +125,6 @@ const Login: React.FC<LoginProps> = ({}) => {
           <RegisterMeButton onClick={handleRegisterClick}>
             Apply to become a Toyken Retailer
           </RegisterMeButton>
-          {isError ? <div>Invalid credentials</div> : null}
         </Box>
       )}
     </>

@@ -40,10 +40,10 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
   };
   const handleManageMyAccountClick = () => {
     window.location.href = "dashboard/retail-sections/receive-form";
-  }
+  };
   const handleManageInventoryClick = () => {
     window.location.href = "dashboard/my-inventory";
-  }
+  };
 
   const onRedirectHandler = async () => {
     const rawResponse = await fetch(
