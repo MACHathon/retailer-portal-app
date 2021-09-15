@@ -27,15 +27,15 @@ const Home: NextPage = () => {
       //let retailer = await createRetailer("dave-retailer@gmail.com", "password", "dave books", "bs30 6el", "UK");
 
       // LOG IN
-      const tryLogin = await login();
+      // const tryLogin = await login();
 
-      const content = await tryLogin.json();
-      console.log(content);
+      // const content = await tryLogin.json();
+      // console.log(content);
 
-      let me = await getMe();
+      // let me = await getMe();
 
-      console.log("me");
-      console.log(me);
+      // console.log("me");
+      // console.log(me);
 
       //SET RETAILER PREFS
       // let setPrefs = await setRetailerPref(
@@ -45,8 +45,8 @@ const Home: NextPage = () => {
       //   false,
       //   true
       // );
-      let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
-      console.log(getPrefs);
+      // let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
+      // console.log(getPrefs);
 
       // ACCEPT TOYKENS - TO DO @NICK
       //let transfer = await acceptToykens("0069", "", 10);

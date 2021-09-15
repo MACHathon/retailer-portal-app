@@ -3,10 +3,10 @@ import { Fragment } from "react";
 import { IoCloseOutline, IoCheckmarkOutline } from 'react-icons/io5'
 
 import { Box, Text, Image } from "@chakra-ui/react";
-import { Item } from "pages/dashboard/review-section";
+import { InventoryItem } from "pages/dashboard/my-inventory";
 
 interface Props {
-    items: Item[]
+    items: InventoryItem[]
     onRejectHandler: (type: string, productId: string, sku:string, childId: string) => void
     onAddHandler: (type: string, productId: string, sku:string, childId: string) => void
     buttonLabels?: boolean
@@ -18,7 +18,7 @@ const IventoryList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, b
         <Fragment>
         {
             items &&
-            items.map((item: Item) => {
+            items.map((item: InventoryItem) => {
                 return (
                     <Box
                         key={ item.commercetoolsProductId }
@@ -94,7 +94,7 @@ const IventoryList: NextPage<Props> = ({ items, onAddHandler, onRejectHandler, b
                             </Box>
                         </Box>
 
-                        { item.received ? 
+                        { !item.received ? 
 
                         <Box
                             height='100%'

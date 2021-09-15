@@ -27,6 +27,11 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
     (async () => {
       let me = await getMe();
       console.log(me);
+
+      if (!me) {
+        window.location.href = "/";
+      }
+
       let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
       console.log(getPrefs);
     })();

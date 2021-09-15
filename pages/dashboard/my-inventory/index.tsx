@@ -27,7 +27,7 @@ const searchClient = algoliasearch(
   );
   
 
-type Item = {
+export type InventoryItem = {
   assignedToRetailer: string;
   childId: string;
   allowedDeliveryOptions: string[];
@@ -46,7 +46,7 @@ type Item = {
 
 const MyInventory: NextPage = (): JSX.Element => {
   const [me, setMe] = React.useState<Me | null>(null);
-  const [items, setItems] = React.useState<Item[]>([]);
+  const [items, setItems] = React.useState<InventoryItem[]>([]);
   const [assignedLocalCacheWhilstReindex, setAssignedLocalCacheWhilstReindex] =
     React.useState<string[]>([]);
 
@@ -95,12 +95,12 @@ const MyInventory: NextPage = (): JSX.Element => {
         ]
        });
 
-      let resultItems: Item[] = [];
+      let resultItems: InventoryItem[] = [];
 
       console.log(results.hits);
 
       results.hits.forEach((hit: any) => {
-        let newItem: Item = {
+        let newItem: InventoryItem = {
           assignedToRetailer: hit.facets["assigned-to"],
           allowedDeliveryOptions: hit.facets["delivery-option"],
           childId: hit.facets["child-id"],
