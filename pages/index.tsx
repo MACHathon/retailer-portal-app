@@ -50,15 +50,20 @@ const Home: NextPage = () => {
 
       // ACCEPT TOYKENS - TO DO @NICK
       //let transfer = await acceptToykens("0069", "", 10);
-      let customerId = '41c6e13b-f54c-43df-b65d-9d326e5954de';
-      let toykens = await getToykensForCustomer(customerId);
-      console.log(`User ${customerId} has ${toykens} toykens`);
-      toykens = await incrementToykensForCustomer(customerId);
-      console.log(`After increment User ${customerId} has ${JSON.stringify(toykens)} toykens`);
-      toykens = await decrementToykensForCustomer(customerId);
-      console.log(`After decrement User ${customerId} has ${toykens} toykens`);
-      toykens = await getToykensForCustomer(customerId);
-      console.log(`User ${customerId} has ${toykens} toykens`);
+      // let customerId = '28e9c9dd-fd61-439f-ae38-161f98e92953';
+      // let toykens = await getToykensForCustomer(customerId);
+      // console.log(`User ${customerId} has ${toykens} toykens`);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // toykens = await incrementToykensForCustomer(customerId);
+      // console.log(`After increment User ${customerId} has ${JSON.stringify(toykens)} toykens`);
+      // //toykens = await decrementToykensForCustomer(customerId);
+      // console.log(`After decrement User ${customerId} has ${toykens} toykens`);
+      // toykens = await getToykensForCustomer(customerId);
+      // console.log(`User ${customerId} has ${toykens} toykens`);
 
       // GET DISTANCE FOR LOCAL OFFERS
       //let distance = await getDistance("BS312FJ", "BS306EL");

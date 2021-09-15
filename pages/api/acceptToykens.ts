@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from "cookie";
 import SdkAuth from "@commercetools/sdk-auth";
 import { SecureApiClient } from "../../packages/Commercetools/Clients/SecureApiClient";
+import { incrementToykensForCustomer } from "packages/Commercetools/Toykens/toykenRepository";
 
 type Data = {
   data: string;
@@ -18,7 +19,6 @@ export default async function handler(
 
   let childCommercetoolsId = '';
 
-  // For Child try get email address based on the username provided - Probably not ideal but its a hackathon :)
   var response = await SecureApiClient.customers()
     .get({ queryArgs: { where: `title = "${childShortId}"` } })
     .execute();
@@ -27,7 +27,11 @@ export default async function handler(
 
     if (response.body.results.length > 0) {
       childCommercetoolsId = response.body.results[0].id;
-      console.log(childCommercetoolsId);
+      
+      for (let i = 0; i < quantity; i++)
+      {
+        await incrementToykensForCustomer(childCommercetoolsId);
+      }     
     }
   }
 

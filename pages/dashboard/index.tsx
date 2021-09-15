@@ -20,37 +20,15 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
     "EusTaxiEB6z2XfT2RUmgN"
   );
 
+
+
   const handleReviewClick = async () => {
-    const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST}/api/logout`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (rawResponse.status == 200) {
-      window.location.href = "/";
-    }
+    
+      window.location.href = "/dashboard/review-section";
+    
   };
-  const handleAcceptTpykensClick = async () => {
-    const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST}/api/logout`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (rawResponse.status == 200) {
-      window.location.href = "/";
-    }
+  const handleAcceptToykensClick = async () => {
+    window.location.href = "/dashboard/accept";
   };
 
   const onRedirectHandler = async () => {
@@ -83,7 +61,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
 
       <Box d="flex" flexDirection="row" width="60%" margin="0 auto" height="100px">
         <Box margin="auto auto auto 0">
-          <Text fontSize="20px">{data?.fields?.offersToReviewLabel}</Text>
+          <Text fontSize="20px">{data?.fields?.offersToReviewLabel.replace("{itemToReviewCount}", "10")}</Text>
         </Box>
         <Button
           bg="#EA6699"
@@ -124,7 +102,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleReviewClick}
+          onClick={handleAcceptToykensClick}
         >
           {data?.fields?.acceptToykensCtaLabel} &gt;
         </Button>
@@ -150,7 +128,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleAcceptTpykensClick}
+          onClick={handleAcceptToykensClick}
         >
           {data?.fields?.myInventoryCtaLabel}
         </Button>
@@ -172,7 +150,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleAcceptTpykensClick}
+          onClick={handleAcceptToykensClick}
         >
           {data?.fields?.manageAccountCtaLabel}
         </Button>
