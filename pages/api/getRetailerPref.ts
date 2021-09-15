@@ -17,7 +17,7 @@ export default async function handler(
   let retailerId: string = req.body.retailerId;
 
   let data = await SecureApiClient.customObjects()
-  .get({ queryArgs: { where: 'container="retailer_pref_485ce075-cc33-4b7f-8842-a040dd49cbba"' } })
+  .get({ queryArgs: { where: `container="retailer_pref_${retailerId}"` } })
   .execute();
 
   console.log("get ret pref");

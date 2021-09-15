@@ -1,11 +1,16 @@
 import { NextPage } from "next"
 import { Slider, SliderFilledTrack, SliderTrack, SliderThumb, Box, Text } from '@chakra-ui/react'
+import { useState } from "react";
 
 interface Props {
     setSliderValue: (value: any) => void
+    initValue: number
 }
 
-const SliderInput: NextPage<Props> = ({ setSliderValue }):JSX.Element => {
+const SliderInput: NextPage<Props> = ({ setSliderValue, initValue }):JSX.Element => {
+
+    const [value, setValue] = useState(initValue);
+
     return(
         <Box
             width='100%'
@@ -24,10 +29,10 @@ const SliderInput: NextPage<Props> = ({ setSliderValue }):JSX.Element => {
             </Text>
             <Slider 
                 min={0} 
-                defaultValue={10}
-                max={20} 
+                defaultValue={value}
+                max={100} 
                 step={1}
-                onChangeEnd={(val) => setSliderValue(val)}
+                onChangeEnd={(val) => { setValue(val); setSliderValue(val) }}
             >
                 <SliderTrack bg="#EBEBEB">
                     <SliderFilledTrack bg="#66B8EC" />
@@ -39,7 +44,7 @@ const SliderInput: NextPage<Props> = ({ setSliderValue }):JSX.Element => {
                 color='#000000'
                 marginLeft='10px'
             >
-                20km
+                {value}km
             </Text>
         </Box>
     )

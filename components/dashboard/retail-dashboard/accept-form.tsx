@@ -27,10 +27,12 @@ const AcceptForm = (): JSX.Element => {
     visibleFor: "",
   });
 
-  const [itemTypes, setItemTypes] = useState<Category[]>([]);
+  
   const [numToykens, setNumToykens] = useState<string>("");
   const [childId, setChildId] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const [itemTypes, setItemTypes] = useState<Category[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -128,7 +130,7 @@ const AcceptForm = (): JSX.Element => {
               }))}
               placeholder="Type of Item"
             />
-            <Box d="flex" flexDirectio="row">
+            <Box d="flex" flexDirection="row">
               <TextInputField
                 isPassword={false}
                 name="name"

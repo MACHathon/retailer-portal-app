@@ -9,6 +9,9 @@ import { useRouter } from "next/router";
 import RetailerLayout from "@/components/shared-components/layouts/retailer-layout";
 import { useContentfulData } from "@/components/hooks/useContentfulData";
 import { TypeComponentRetailerDashboard } from "lib/types";
+import { useEffect } from "react";
+import { getRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
+import { getMe } from "packages/Commercetools/Users/getUser";
 
 interface Props {
   cards: Card[];
@@ -20,16 +23,24 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
     "EusTaxiEB6z2XfT2RUmgN"
   );
 
-
+  useEffect(() => {
+    (async () => {
+      let me = await getMe();
+      console.log(me);
+      let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
+      console.log(getPrefs);
+    })();
+  });
 
   const handleReviewClick = async () => {
-    
-      window.location.href = "/dashboard/review-section";
-    
+    window.location.href = "/dashboard/review-section";
   };
   const handleAcceptToykensClick = async () => {
     window.location.href = "/dashboard/accept";
   };
+  const handleManageMyAccountClick = () => {
+    window.location.href = "dashboard/retail-sections/receive-form";
+  }
 
   const onRedirectHandler = async () => {
     const rawResponse = await fetch(
@@ -59,9 +70,20 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box d="flex" flexDirection="row" width="60%" margin="0 auto" height="100px">
+      <Box
+        d="flex"
+        flexDirection="row"
+        width="60%"
+        margin="0 auto"
+        height="100px"
+      >
         <Box margin="auto auto auto 0">
-          <Text fontSize="20px">{data?.fields?.offersToReviewLabel.replace("{itemToReviewCount}", "10")}</Text>
+          <Text fontSize="20px">
+            {data?.fields?.offersToReviewLabel.replace(
+              "{itemToReviewCount}",
+              "10"
+            )}
+          </Text>
         </Box>
         <Button
           bg="#EA6699"
@@ -83,7 +105,13 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           {data?.fields?.reviewCtaLabel} &gt;
         </Button>
       </Box>
-      <Box d="flex" flexDirection="row" width="60%" margin="0 auto" height="100px">
+      <Box
+        d="flex"
+        flexDirection="row"
+        width="60%"
+        margin="0 auto"
+        height="100px"
+      >
         <Box margin="auto auto auto 0">
           <Text fontSize="20px">{data?.fields?.acceptToykensLabel}</Text>
         </Box>
@@ -133,7 +161,13 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           {data?.fields?.myInventoryCtaLabel}
         </Button>
       </Box>
-      <Box d="flex" flexDirection="column" width="60%" margin="0 auto" height="70px">
+      <Box
+        d="flex"
+        flexDirection="column"
+        width="60%"
+        margin="0 auto"
+        height="70px"
+      >
         <Button
           bg="#fff"
           color="#66B8EC"
@@ -150,24 +184,30 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           fontSize="20px"
           fontWeight="700"
           _hover={{ bg: "#2f5a74" }}
-          onClick={handleAcceptToykensClick}
+          onClick={handleManageMyAccountClick}
         >
           {data?.fields?.manageAccountCtaLabel}
         </Button>
       </Box>
-      <Box d="flex" flexDirection="column" width="60%" margin="0 auto" marginTop="20" height="70px">
-      <Button
-        height="72px"
-        backgroundColor="#ff7b7b"
-        textColor="#FFF"
-        onClick={onRedirectHandler}
-        paddingLeft="30"
-        paddingRight="30"
-        width="200px"
-        
+      <Box
+        d="flex"
+        flexDirection="column"
+        width="60%"
+        margin="0 auto"
+        marginTop="20"
+        height="70px"
       >
-        Logout
-      </Button>
+        <Button
+          height="72px"
+          backgroundColor="#ff7b7b"
+          textColor="#FFF"
+          onClick={onRedirectHandler}
+          paddingLeft="30"
+          paddingRight="30"
+          width="200px"
+        >
+          Logout
+        </Button>
       </Box>
     </RetailerLayout>
   );

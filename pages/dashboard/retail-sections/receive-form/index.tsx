@@ -3,8 +3,14 @@ import { NextPage } from "next"
 
 import TitleField from "@/components/shared-components/text-fields/title-field";
 import ReceiveFromSection from "@/components/dashboard/retail-dashboard/receive-form-section/receive-form-section";
+import { useEffect, useState } from "react";
+import { getCategories } from "packages/Commercetools/Categories/getCategories";
+
+
 
 const ReceiveForm: NextPage = ():JSX.Element => {
+
+
 
     return (
         <Box
