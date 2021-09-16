@@ -86,7 +86,7 @@ const ReviewSection: NextPage = (): JSX.Element => {
         getRankingInfo: true,
         analytics: false,
         enableABTest: false,
-        hitsPerPage: 10,
+        hitsPerPage: 1000,
         attributesToRetrieve: "*",
         attributesToSnippet: "*:20",
         snippetEllipsisText: "…",
