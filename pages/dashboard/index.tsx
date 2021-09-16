@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import RetailerLayout from "@/components/shared-components/layouts/retailer-layout";
 import { useContentfulData } from "@/components/hooks/useContentfulData";
 import { TypeComponentRetailerDashboard } from "lib/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getRetailerPref } from "packages/Commercetools/Retailer/retailerPref";
 import { getMe } from "packages/Commercetools/Users/getUser";
 
@@ -23,6 +23,8 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
     "EusTaxiEB6z2XfT2RUmgN"
   );
 
+  const [hasLoaded, setHasLoaded] = useState(false); 
+
   useEffect(() => {
     (async () => {
       let me = await getMe();
@@ -30,10 +32,12 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
 
       if (!me) {
         window.location.href = "/";
+      } else {
+        let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
+        console.log(getPrefs);
+        setHasLoaded(true);
       }
-
-      let getPrefs = await getRetailerPref(me?.commerceToolsId as string);
-      console.log(getPrefs);
+      
     })();
   });
 
@@ -51,33 +55,36 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
   };
 
   const onRedirectHandler = async () => {
-    const rawResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST}/api/logout`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // const rawResponse = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_HOST}/api/logout`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
 
     // Deleeting cookies... never easy
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/";
 
-    if (rawResponse.status == 200) {
-      window.location.href = "/";
-    }
+    // if (rawResponse.status == 200) {
+    //   window.location.href = "/";
+    // }
   };
 
   return (
+   
     <RetailerLayout>
+      
       <Head>
         <title>Retail Portal - Dashboard</title>
         <meta name="description" content="Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      { hasLoaded ? <div>
       <Box
         d="flex"
         flexDirection="row"
@@ -216,8 +223,10 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         >
           Logout
         </Button>
-      </Box>
+      </Box> 
+      </div> : null }
     </RetailerLayout>
+    
   );
 };
 
