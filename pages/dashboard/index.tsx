@@ -76,7 +76,8 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
   };
 
   return (
-   
+   <>
+    { hasLoaded ?
     <RetailerLayout>
       
       <Head>
@@ -84,7 +85,7 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
         <meta name="description" content="Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      { hasLoaded ? <div>
+    
       <Box
         d="flex"
         flexDirection="row"
@@ -224,8 +225,9 @@ const ParentDashboard: NextPage<Props> = ({ cards }) => {
           Logout
         </Button>
       </Box> 
-      </div> : null }
-    </RetailerLayout>
+    </RetailerLayout>   : null }
+
+    </>
     
   );
 };
